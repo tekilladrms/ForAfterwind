@@ -1,0 +1,252 @@
+@font-face {
+    font-family: Main_font;
+    src: url('../fonts/Main_font.ttf') format('truetype');
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-image: url("../img/BG_1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.wrapper {
+    min-height: 100%;
+    margin-bottom: 50px;
+}
+
+.background__dark {
+    background-color: rgba(0, 0, 0, 0.63);
+}
+
+h1, h2, h3 {
+    color: #fff;
+}
+
+
+
+/*------------------- Menu -------------------*/
+
+.logo {
+    margin-top: 10px;
+    width: 200px;
+    height: 70px;
+}
+
+.menu li ul {
+    position: absolute;
+    min-width: 150px;
+    display: none;
+}
+
+.menu li > ul li ul {
+    position: absolute;
+    right: -150px;
+    top: 0;
+}
+
+.menu li ul {
+    padding-top: 0;
+    padding-left: 0;
+}
+
+    .menu li ul:first-child {
+        margin-left: -30px;
+    }
+
+.menu li {
+    list-style: none;
+    padding-left: 30px;
+    margin-top: 30px;
+    padding-bottom: 0;
+}
+
+    .menu li a, .links__item a {
+        text-decoration: none;
+        text-align: center;
+        font-size: 18px;
+        text-transform: uppercase;
+        color: #c7c7c7;
+        font-family: Main_font;
+    }
+
+        .menu li a:hover {
+            color: #fff;
+            background-color: none;
+        }
+
+    .menu li:hover > ul {
+        display: flex;
+        padding-bottom: 10px;
+        padding-left: 0;
+        padding-top: 0;
+    }
+
+.links__item img {
+    width: 30px;
+    height: 30px;
+    margin-left: 30%;
+}
+
+/*--------------- Left Sidebar ---------------*/
+
+.left {
+    height: 100%;
+    white-space: nowrap;
+    transition: width 0.5s;
+    position: fixed;
+    left: 0;
+    top: 30%;
+    z-index: 9999;
+}
+
+    .left ul li {
+        padding-top: 20px;
+        text-align: center;
+        list-style: none;
+    }
+
+        .left ul li a i {
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .left ul li:hover > a {
+            color: #a40909;
+        }
+
+
+/*---------- Сокрытие\отображение -----------*/
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: flex;
+}
+
+
+
+/*---------------- About Controller ----------------*/
+
+.about {
+    position: absolute;
+    top: 15%;
+}
+
+.owl-carousel div {
+    position: relative;
+}
+
+    .owl-carousel div p {
+        color: #fff;
+        font-size: 20px;
+        position: absolute;
+        bottom: 15px;
+        padding: 0 5%;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.63);
+    }
+
+.about__image p {
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    bottom: 15px;
+    padding: 0 5%;
+    max-width: 90%;
+    text-align: center;
+}
+
+.about__text p {
+    top: 20%;
+}
+
+/*---------*/
+
+.musicians {
+    position: relative;
+    top: 15%;
+}
+
+.musician-photo {
+    max-height: 75vh;
+}
+
+
+.scale {
+    /*display: inline-block;*/ /* Строчно-блочный элемент */
+    overflow: hidden; /* Скрываем всё за контуром */
+    padding: 0;
+}
+
+    .scale img {
+        transition: 0.5s; /* Время эффекта */
+        /*display: block;*/ /* Убираем небольшой отступ снизу */
+    }
+
+        .scale img:hover {
+            transform: scale(1.1); /* Увеличиваем масштаб */
+        }
+
+.minimize-photo {
+    max-height: 25vh;
+    position: absolute;
+    bottom: 0;
+}
+
+.active {
+    z-index: 9999;
+
+}
+
+.info {
+    padding-top: 10%;
+    padding-left: 5%;
+    color: #fff;
+}
+
+.musician__links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+    .musician__links li {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+        .musician__links li a {
+            text-decoration: none;
+            color: #c7c7c7;
+            text-align: center;
+        }
+
+            .musician__links li a:hover {
+                text-decoration: none;
+                color: #fff;
+            }
+
+
+
+
+/*------------- MEDIA --------------*/
+
+.album{
+    
+}
+
+.album__cover{
+    max-height: 25vh;
+    max-width: 25vh;
+    
+}
+.album__cover:hover{
+    z-index: 9999;
+}
+

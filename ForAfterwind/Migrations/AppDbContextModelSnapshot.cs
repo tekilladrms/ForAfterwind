@@ -30,12 +30,50 @@ namespace ForAfterwind.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Skills")
+                    b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Musicians");
+                });
+
+            modelBuilder.Entity("ForAfterwind.Domain.Release", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PathToCover")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Releases");
+                });
+
+            modelBuilder.Entity("ForAfterwind.Domain.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("MusicianId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MusicianId");
+
+                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("ForAfterwind.Domain.SocialLink", b =>
@@ -45,17 +83,46 @@ namespace ForAfterwind.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Link")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("MusicianId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MusicianId");
 
                     b.ToTable("SocialLinks");
+                });
+
+            modelBuilder.Entity("ForAfterwind.Domain.Song", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PathToSong")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ReleaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReleaseId");
+
+                    b.ToTable("Songs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -254,11 +321,25 @@ namespace ForAfterwind.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ForAfterwind.Domain.Skill", b =>
+                {
+                    b.HasOne("ForAfterwind.Domain.Musician", "Musician")
+                        .WithMany("Skills")
+                        .HasForeignKey("MusicianId");
+                });
+
             modelBuilder.Entity("ForAfterwind.Domain.SocialLink", b =>
                 {
-                    b.HasOne("ForAfterwind.Domain.Musician", null)
+                    b.HasOne("ForAfterwind.Domain.Musician", "Musician")
                         .WithMany("SocialLinks")
                         .HasForeignKey("MusicianId");
+                });
+
+            modelBuilder.Entity("ForAfterwind.Domain.Song", b =>
+                {
+                    b.HasOne("ForAfterwind.Domain.Release", "Release")
+                        .WithMany("Songs")
+                        .HasForeignKey("ReleaseId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

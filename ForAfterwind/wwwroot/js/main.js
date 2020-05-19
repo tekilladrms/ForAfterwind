@@ -31,7 +31,7 @@ $(document).ready(function () {
 function showInfo(e) {
 
     let collection;
-    
+
 
 
 
@@ -50,7 +50,7 @@ function showInfo(e) {
         }
         collection[i].classList.remove("active");
         collection[i].parentNode.classList.remove("active");
-        
+
     }
 
     if (!e.classList.contains("active")) {
@@ -61,15 +61,15 @@ function showInfo(e) {
         e.parentNode.classList.add("active");
         e.parentNode.classList.add("order-first");
         e.parentNode.classList.add("col-md-10");
-        
+
 
         newActiveElement(e, collection);
-        
+
     }
     else {
 
         // при повторном нажатии сработает этот код
-        
+
         e.classList.remove("active");
         e.parentNode.classList.remove("active");
         toDefault(collection);
@@ -103,11 +103,11 @@ function newActiveElement(e, collection) {
         }
     }
     displayInfo(infoElements);
-    
+
 }
 
 function displayInfo(collection) {
-    
+
     for (var i = 0; i < collection.length; i++) {
         if (collection[i].parentNode.classList.contains("active")) {
             collection[i].classList.remove("hidden");
@@ -123,21 +123,25 @@ function displayInfo(collection) {
 
 function showAlbum(e) {
 
+
     for (var i = 0; i < albums.length; i++) {
         if (albums[i] == e.parentNode) {
             continue;
         }
         albums[i].classList.remove("active");
+
     }
 
     if (!e.parentNode.classList.contains("active")) {
         e.parentNode.classList.add("active");
+        switchClass(e.parentNode, "col-md-3", "col-md");
         $('#unhiddenInfo').prepend(e.parentNode);
         displayInfo(infoElements);
     }
     else {
         e.parentNode.classList.remove("active");
         $("#hiddenInfo").append(e.parentNode);
+
     }
 
     move();
@@ -146,15 +150,23 @@ function showAlbum(e) {
 
 
 function move() {
-    
+
     for (var i = 0; i < albums.length; i++) {
         if (albums[i].classList.contains("active")) {
-            
+            switchClass(albums[i], "col-md-3", "col-md");
             $('#unhiddenInfo').prepend(albums[i]);
             displayInfo(infoElements);
         }
         else {
             $("#hiddenInfo").append(albums[i]);
+            switchClass(albums[i], "col-md", "col-md-3");
         }
     }
 }
+
+function switchClass(element, oldClass, newClass) {
+    element.classList.remove(oldClass);
+    element.classList.add(newClass);
+}
+
+

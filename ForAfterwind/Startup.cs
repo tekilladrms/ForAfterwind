@@ -18,9 +18,9 @@ namespace ForAfterwind
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(x => x.UseSqlServer(
-                @"Data Source=(localdb)\MSSQLLocalDB; Database=Db_Afterwind; Persist Security Info=false; MultipleActiveResultSets=True; Trusted_Connection=true;"
-                ));
+            //services.AddDbContext<AppDbContext>(x => x.UseSqlServer(
+            //    @"Data Source=(localdb)\MSSQLLocalDB; Database=Db_Afterwind; Persist Security Info=false; MultipleActiveResultSets=True; Trusted_Connection=true;"
+            //    ));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddMvc(options => options.EnableEndpointRouting = false);

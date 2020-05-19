@@ -16,6 +16,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200515173337_AddPathToPhoto.cs" />
+    <Compile Remove="Migrations\20200515173337_AddPathToPhoto.Designer.cs" />
+    <Compile Remove="Migrations\20200518111816_AddingSkills.cs" />
+    <Compile Remove="Migrations\20200518111816_AddingSkills.Designer.cs" />
+    <Compile Remove="Migrations\20200518125806_AddingSkills.cs" />
+    <Compile Remove="Migrations\20200518125806_AddingSkills.Designer.cs" />
+    <Compile Remove="Migrations\20200518131251_SomeChanges.cs" />
+    <Compile Remove="Migrations\20200518131251_SomeChanges.Designer.cs" />
+    <Compile Remove="Migrations\20200519040905_AddReleases.cs" />
+    <Compile Remove="Migrations\20200519040905_AddReleases.Designer.cs" />
+    <Compile Remove="Migrations\20200519041456_AddReleases.cs" />
+    <Compile Remove="Migrations\20200519041456_AddReleases.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
 

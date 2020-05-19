@@ -14,9 +14,16 @@ namespace ForAfterwind.Domain
         [Required]
         public string Name { get; set; }
 
-        public string Skills { get; set; }
+        public string Photo { get; set; }
 
-        public List<SocialLink> SocialLinks { get; set; }
+        public ICollection<SocialLink> SocialLinks { get; set; }
+        public ICollection<Skill> Skills { get; set; }
+
+        public Musician()
+        {
+            SocialLinks = new List<SocialLink>();
+            Skills = new List<Skill>();
+        }
 
 
     }

@@ -138,8 +138,21 @@ h1, h2, h3 {
     top: 15%;
 }
 
-.owl-carousel div {
-    position: relative;
+.owl-dots {
+    position: fixed;
+    bottom: 0;
+    color: #fff;
+}
+
+.owl-nav {
+    position: fixed;
+    bottom: 10px;
+    font-size: 80px;
+    color: #fff;
+}
+
+.owl-item {
+    max-height: 40%;
 }
 
     .owl-carousel div p {
@@ -171,6 +184,10 @@ h1, h2, h3 {
 .musicians {
     position: relative;
     top: 15%;
+    /*left: 50px;*/
+}
+.musician .album:hover {
+    cursor: pointer;
 }
 
 .musician-photo {
@@ -191,6 +208,7 @@ h1, h2, h3 {
 
         .scale img:hover {
             transform: scale(1.1); /* Увеличиваем масштаб */
+            cursor:pointer;
         }
 
 .minimize-photo {
@@ -201,14 +219,17 @@ h1, h2, h3 {
 
 .active {
     z-index: 9999;
-
 }
 
 .info {
-    padding-top: 10%;
-    padding-left: 5%;
+    padding-top: 3%;
+    padding-left: 3%;
     color: #fff;
 }
+
+    .info ul li {
+        font-size: 18px;
+    }
 
 .musician__links {
     display: flex;
@@ -216,9 +237,9 @@ h1, h2, h3 {
     padding: 0;
 }
 
+
     .musician__links li {
         padding: 10px;
-        font-size: 16px;
     }
 
         .musician__links li a {
@@ -237,16 +258,39 @@ h1, h2, h3 {
 
 /*------------- MEDIA --------------*/
 
-.album{
-    
+audio {
+    width: 400px;
+    height: 30px;
 }
 
-.album__cover{
-    max-height: 25vh;
-    max-width: 25vh;
-    
-}
-.album__cover:hover{
-    z-index: 9999;
+.audio-player {
+    display: flex;
+    margin: 0 auto;
+    height: 70px;
+    align-items: center;
 }
 
+    .audio-player p {
+        margin-right: 30px;
+        width: 70px;
+        margin-top: 16px;
+    }
+.album {
+    overflow: hidden;
+}
+
+#unhiddenInfo div img {
+    max-height: 40vh;
+    max-width: 40vh;
+    margin-bottom: 5%;
+}
+
+#unhiddenInfo div div h2 {
+    padding-bottom: 3%;
+    text-align: center;
+}
+
+#hiddenInfo div img {
+    max-height: 30vh;
+    max-width: 30vh;
+}

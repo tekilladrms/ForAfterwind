@@ -22,6 +22,18 @@ namespace ForAfterwind.Domain
 
         public DbSet<Song> Songs { get; set; }
 
+        public DbSet<VideoAlbum> VideoAlbums { get; set; }
+
+        public DbSet<Video> Videos { get; set; }
+
+        public DbSet<PhotoAlbum> PhotoAlbums { get; set; }
+
+        public DbSet<Photo> Photos { get; set; }
+
+        
+
+       
+
 
         public AppDbContext()
         {

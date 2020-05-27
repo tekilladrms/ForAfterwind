@@ -28,6 +28,12 @@
     <Compile Remove="Migrations\20200519040905_AddReleases.Designer.cs" />
     <Compile Remove="Migrations\20200519041456_AddReleases.cs" />
     <Compile Remove="Migrations\20200519041456_AddReleases.Designer.cs" />
+    <Compile Remove="Migrations\20200520083242_AddVideoAlbums.cs" />
+    <Compile Remove="Migrations\20200520083242_AddVideoAlbums.Designer.cs" />
+    <Compile Remove="Migrations\20200520084902_AddVideoAlbumId.cs" />
+    <Compile Remove="Migrations\20200520084902_AddVideoAlbumId.Designer.cs" />
+    <Compile Remove="Migrations\20200523070406_AddPhotoAndPhotoAlbums.cs" />
+    <Compile Remove="Migrations\20200523070406_AddPhotoAndPhotoAlbums.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

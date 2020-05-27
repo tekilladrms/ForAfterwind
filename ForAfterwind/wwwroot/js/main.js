@@ -4,6 +4,10 @@ const musiciansPhotos = document.getElementsByClassName("musician-photo");
 const infoElements = document.getElementsByClassName("info");
 const albumCovers = document.getElementsByClassName("album__cover");
 const albums = document.getElementsByClassName("album");
+const videoAlbums = document.getElementsByClassName("video-album");
+const photoAlbums = document.getElementsByClassName("photo-album");
+const videos = Array.from(document.querySelectorAll('video'));
+const audios = Array.from(document.querySelectorAll('audio'));
 
 
 
@@ -22,6 +26,44 @@ $(document).ready(function () {
 
             }
         }
+    });
+
+    $(document).ready(function () {
+        $(".fancybox").fancybox();
+    });
+
+    let playing = true;
+
+    videos.forEach(video => {
+        video.addEventListener('play', function () {
+            if (playing) {
+                videos.forEach(el => {
+                    el.pause();
+                });
+            }
+            if (this.paused) {
+                playing = false;
+                this.play();
+            } else {
+                playing = true;
+            }
+        });
+    });
+
+    audios.forEach(audio => {
+        audio.addEventListener('play', function () {
+            if (playing) {
+                audios.forEach(el => {
+                    el.pause();
+                });
+            }
+            if (this.paused) {
+                playing = false;
+                this.play();
+            } else {
+                playing = true;
+            }
+        });
     });
 }
 );
@@ -123,43 +165,60 @@ function displayInfo(collection) {
 
 function showAlbum(e) {
 
+    let collection;
+    let oldClass;
+    let newClass;
 
-    for (var i = 0; i < albums.length; i++) {
-        if (albums[i] == e.parentNode) {
+    if (e.parentNode.classList.contains("video-album")) {
+        collection = videoAlbums;
+        
+    }
+    else if (e.parentNode.classList.contains("photo-album")) {
+        collection = photoAlbums;
+    }
+    else {
+        collection = albums;
+        oldClass = "col-md-3";
+        newClass = "col-md";
+    }
+
+    for (var i = 0; i < collection.length; i++) {
+        if (collection[i] == e.parentNode) {
             continue;
         }
-        albums[i].classList.remove("active");
-
+        collection[i].classList.remove("active");
+        
     }
 
     if (!e.parentNode.classList.contains("active")) {
         e.parentNode.classList.add("active");
-        switchClass(e.parentNode, "col-md-3", "col-md");
+        switchClass(e.parentNode, oldClass, newClass);
+        
         $('#unhiddenInfo').prepend(e.parentNode);
         displayInfo(infoElements);
     }
     else {
         e.parentNode.classList.remove("active");
         $("#hiddenInfo").append(e.parentNode);
-
+        displayInfo(infoElements);
     }
 
-    move();
+    move(collection, oldClass, newClass);
 }
 
 
 
-function move() {
+function move(collection, oldClass, newClass) {
 
-    for (var i = 0; i < albums.length; i++) {
-        if (albums[i].classList.contains("active")) {
-            switchClass(albums[i], "col-md-3", "col-md");
-            $('#unhiddenInfo').prepend(albums[i]);
+    for (var i = 0; i < collection.length; i++) {
+        if (collection[i].classList.contains("active")) {
+            switchClass(collection[i], oldClass, newClass);
+            $('#unhiddenInfo').prepend(collection[i]);
             displayInfo(infoElements);
         }
         else {
-            $("#hiddenInfo").append(albums[i]);
-            switchClass(albums[i], "col-md", "col-md-3");
+            $("#hiddenInfo").append(collection[i]);
+            switchClass(collection[i], newClass, oldClass);
         }
     }
 }
@@ -168,5 +227,7 @@ function switchClass(element, oldClass, newClass) {
     element.classList.remove(oldClass);
     element.classList.add(newClass);
 }
+
+
 
 

@@ -19,7 +19,9 @@ namespace ForAfterwind.Controllers
 
         public IActionResult Video()
         {
-            return View();
+            var videoAlbums = db.VideoAlbums.Include(x => x.Videos);
+
+            return View(videoAlbums);
         }
 
         public IActionResult Audio()
@@ -30,7 +32,8 @@ namespace ForAfterwind.Controllers
 
         public IActionResult Photo()
         {
-            return View();
+            var photoAlbums = db.PhotoAlbums.Include(x => x.Photos);
+            return View(photoAlbums);
         }
     }
 }

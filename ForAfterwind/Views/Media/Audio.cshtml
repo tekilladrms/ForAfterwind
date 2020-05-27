@@ -1,21 +1,18 @@
 ﻿@model IEnumerable<ForAfterwind.Domain.Release>
 
 
-<div class="container background__dark">
-    <div id="unhiddenInfo" class="row">
+<div class="container">
+    <div id="unhiddenInfo" class="row overflow-auto background__dark">
 
     </div>
-    <div id="hiddenInfo" class="row">
+    <div id="hiddenInfo" class="row background__dark">
 
-        @*<div class="col-md-3 d-flex album scale">
-            <img class="album__cover" src="~/Media/Albums/The World Is Suffering/Cover.jpg" alt="The World Is Suffering" onclick="showAlbum(this)" />
-            <div class="info hidden">
-                <h2>The World Is Suffering</h2>
-            </div>
-
-        </div>*@
         @foreach (var el in Model)
         {
+            @if (el.Name == "")
+            {
+                continue;
+            }
             <div class="col-md-3 d-flex album scale">
                 <img class="album__cover" src="@Url.Content(el.PathToCover)" alt="@el.Name" onclick="showAlbum(this)" />
                 <div class="info hidden">
@@ -23,7 +20,7 @@
 
                     @foreach (var item in el.Songs)
                     {
-                        @if(item.Type.ToString() == "video")
+                        @if (item.Type.Value.ToString() == "Video")
                         {
                             continue;
                         }
@@ -38,74 +35,6 @@
             </div>
         }
 
-
-        @*<div class="col-md-3 d-flex album scale">
-            <img class="album__cover" src="~/Media/Albums/Here We Remain/Cover.jpg" alt="Here We Remain" onclick="showAlbum(this)" />
-            <div class="info hidden">
-                <h2>@el.Name</h2>
-
-                <div class="audio-player">
-                    <p>Here We Remain</p>
-                    <audio id="audio-player" src="~/Media/Albums/Here We Remain/afterwind-here-we-remain.mp3" type="audio/mp3" controls="controls" controlsList="nodownload"></audio>
-                </div>
-
-                <div class="audio-player">
-                    <p>P.Y.T</p>
-                    <audio id="audio-player" src="~/Media/Albums/Here We Remain/afterwind-p-y-t.mp3" type="audio/mp3" controls="controls" controlsList="nodownload"></audio>
-                </div>
-
-                <div class="audio-player">
-                    <p>Desperation</p>
-                    <audio id="audio-player" src="~/Media/Albums/Here We Remain/afterwind-desperation.mp3" type="audio/mp3" controls="controls" controlsList="nodownload"></audio>
-                </div>
-
-                <div class="audio-player">
-                    <p>Lifelong dream</p>
-                    <audio id="audio-player" src="~/Media/Albums/Here We Remain/afterwind-lifelong-dream.mp3" type="audio/mp3" controls="controls" controlsList="nodownload"></audio>
-                </div>
-            </div>
-        </div>*@
-
-
-        @*<div class="col-md-3 d-flex album scale">
-            <img class="album__cover" src="~/Media/Albums/Consumed/Cover.jpg" alt="Consumed" onclick="showAlbum(this)" />
-            <div class="info hidden">
-                <h2>Consumed</h2>
-
-                <div class="audio-player">
-                    <p>Consumed</p>
-                    <audio id="audio-player" src="~/Media/Albums/Consumed/afterwind-consumed.mp3" type="audio/mp3" controls="controls" controlsList="nodownload"></audio>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 d-flex album scale">
-            <img class="album__cover" src="~/Media/Albums/Yaoguai/Cover.jpg" alt="Yaoguai" onclick="showAlbum(this)" />
-            <div class="info hidden">
-                <h2>Yaoguai</h2>
-
-                <div class="audio-player">
-                    <p>Yaoguai</p>
-                    <audio id="audio-player" src="~/Media/Albums/Yaoguai/afterwind-yaoguai.mp3" type="audio/mp3" controls="controls" controlsList="nodownload"></audio>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 d-flex album scale">
-            <img class="album__cover" src="~/Media/Albums/Forgotten/Cover.jpg" alt="Forgotten" onclick="showAlbum(this)" />
-            <div class="info album__info hidden">
-                <h2>Forgotten</h2>
-
-                <div class="audio-player">
-                    <p>Forgotten</p>
-                    <audio id="audio-player" src="~/Media/Albums/Forgotten/afterwind-forgotten.mp3" type="audio/mp3" controls="controls" controlsList="nodownload"></audio>
-                </div>
-                <div class="audio-player">
-                    <p>Forgotten</p>
-                    <audio id="audio-player" src="~/Media/Albums/Forgotten/afterwind-forgotten.mp3" type="audio/mp3" controls="controls" controlsList="nodownload"></audio>
-                </div>
-            </div>
-        </div>*@
 
     </div>
 </div>

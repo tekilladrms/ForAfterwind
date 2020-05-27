@@ -15,6 +15,7 @@ namespace ForAfterwind.Domain
         public string PathToSong { get; set; }
         public TypesOfReleases? Type { get; set; }
 
+        
         public int? ReleaseId { get; set; }
         public Release Release { get; set; }
 

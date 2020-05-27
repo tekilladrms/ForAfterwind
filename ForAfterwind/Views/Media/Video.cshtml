@@ -1,4 +1,38 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<ForAfterwind.Domain.VideoAlbum>
+
+
+<div class="container">
+    
+    <div id="unhiddenInfo" class="row background__dark">
+        
+    </div>
+    <div id="hiddenInfo" class="row background__dark">
+        @foreach (var el in Model)
+        {
+        <div class="row video-album">
+            <div class="col-md align-self-center" onclick="showAlbum(this)">
+                <p>@el.Name</p>
+                <img class="video-album_cover" src="@Url.Content(el.PathToCover)" alt="@Url.Content(el.Name)" />
+
+            </div>
+            <div class="info hidden col-md-11">
+                <div class="row overflow-auto video-row justify-content-around background__dark">
+                    @foreach (var item in el.Videos)
+                    {
+                        <div class="col-md-5">
+                            <div class="video-container">
+                                <p>@item.Name</p>
+                                <video class="video-player" src="@Url.Content(item.PathToVideo)" controls="controls" controlsList="nodownload"></video>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+            </div>
+        </div>
+
+        }
+
+    </div>
+</div>
+

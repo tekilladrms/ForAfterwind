@@ -1,4 +1,40 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<ForAfterwind.Domain.PhotoAlbum>
+
+    <div class="container">
+        @*<div class="background__darkest">
+            <h4>Progressive carnage</h4>
+        </div>*@
+
+        <div id="unhiddenInfo" class="background__dark">
+
+        </div>
+        <div id="hiddenInfo" class="background__dark">
+
+            @foreach (var el in Model)
+            {
+            <div class="row photo-album">
+                <div class="col-md" onclick="showAlbum(this)">
+                    <p>@el.Name</p>
+                    <img class="photo-album_cover" src="@Url.Content(el.PathToCover)" alt="" />
+                </div>
+                <div class="info hidden col-md-11">
+                    <div id="grid" class="row overflow-auto no-gutters background__dark">
+                        @foreach (var item in el.Photos)
+                        {
+                            <div>
+                                <a class="fancybox" rel="@Url.Content(el.Name)" href="@Url.Content(item.PathToPhoto)">
+                                    <img class="mini-photo" src="@Url.Content(item.PathToPhoto)" alt="" />
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+                
+            }
+
+        </div>
+
+        
+
+    </div>

@@ -38,6 +38,47 @@ namespace ForAfterwind.Migrations
                     b.ToTable("Musicians");
                 });
 
+            modelBuilder.Entity("ForAfterwind.Domain.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PathToPhoto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PhotoAlbumId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotoAlbumId");
+
+                    b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("ForAfterwind.Domain.PhotoAlbum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PathToCover")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PathToPhotoAlbum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PhotoAlbums");
+                });
+
             modelBuilder.Entity("ForAfterwind.Domain.Release", b =>
                 {
                     b.Property<int>("Id")
@@ -123,6 +164,55 @@ namespace ForAfterwind.Migrations
                     b.HasIndex("ReleaseId");
 
                     b.ToTable("Songs");
+                });
+
+            modelBuilder.Entity("ForAfterwind.Domain.Video", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PathToVideo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ReleaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VideoAlbumId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReleaseId");
+
+                    b.HasIndex("VideoAlbumId");
+
+                    b.ToTable("Videos");
+                });
+
+            modelBuilder.Entity("ForAfterwind.Domain.VideoAlbum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PathToCover")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VideoAlbums");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -321,6 +411,13 @@ namespace ForAfterwind.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ForAfterwind.Domain.Photo", b =>
+                {
+                    b.HasOne("ForAfterwind.Domain.PhotoAlbum", "PhotoAlbum")
+                        .WithMany("Photos")
+                        .HasForeignKey("PhotoAlbumId");
+                });
+
             modelBuilder.Entity("ForAfterwind.Domain.Skill", b =>
                 {
                     b.HasOne("ForAfterwind.Domain.Musician", "Musician")
@@ -340,6 +437,17 @@ namespace ForAfterwind.Migrations
                     b.HasOne("ForAfterwind.Domain.Release", "Release")
                         .WithMany("Songs")
                         .HasForeignKey("ReleaseId");
+                });
+
+            modelBuilder.Entity("ForAfterwind.Domain.Video", b =>
+                {
+                    b.HasOne("ForAfterwind.Domain.Release", "Release")
+                        .WithMany()
+                        .HasForeignKey("ReleaseId");
+
+                    b.HasOne("ForAfterwind.Domain.VideoAlbum", "VideoAlbum")
+                        .WithMany("Videos")
+                        .HasForeignKey("VideoAlbumId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -23,11 +23,42 @@ body {
     background-color: rgba(0, 0, 0, 0.63);
 }
 
-h1, h2, h3 {
+.background__darkest {
+    background-color: rgba(0, 0, 0, 0.80)
+}
+
+h1, h2, h3, h4 {
     color: #fff;
 }
 
 
+/*----Scrollbar----*/
+::-webkit-scrollbar-button {
+    margin-top: 20px;
+    background-image: url('');
+    background-repeat: no-repeat;
+}
+
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 5px;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #a40909;
+    }
+
+::-webkit-resizer {
+    background-image: url('');
+    background-repeat: no-repeat;
+    width: 4px;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
 
 /*------------------- Menu -------------------*/
 
@@ -155,15 +186,15 @@ h1, h2, h3 {
     max-height: 40%;
 }
 
-    .owl-carousel div p {
-        color: #fff;
-        font-size: 20px;
-        position: absolute;
-        bottom: 15px;
-        padding: 0 5%;
-        text-align: center;
-        background-color: rgba(0, 0, 0, 0.63);
-    }
+.owl-carousel div p {
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    bottom: 15px;
+    padding: 0 5%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.63);
+}
 
 .about__image p {
     color: #fff;
@@ -184,8 +215,8 @@ h1, h2, h3 {
 .musicians {
     position: relative;
     top: 15%;
-    /*left: 50px;*/
 }
+
 .musician .album:hover {
     cursor: pointer;
 }
@@ -208,7 +239,7 @@ h1, h2, h3 {
 
         .scale img:hover {
             transform: scale(1.1); /* Увеличиваем масштаб */
-            cursor:pointer;
+            cursor: pointer;
         }
 
 .minimize-photo {
@@ -257,7 +288,7 @@ h1, h2, h3 {
 
 
 /*------------- MEDIA --------------*/
-
+/*----Audio----*/
 audio {
     width: 400px;
     height: 30px;
@@ -275,22 +306,158 @@ audio {
         width: 70px;
         margin-top: 16px;
     }
+
 .album {
     overflow: hidden;
 }
 
-#unhiddenInfo div img {
-    max-height: 40vh;
-    max-width: 40vh;
-    margin-bottom: 5%;
+.album__cover {
+    margin-bottom: 3%;
+    margin-top: 3%;
 }
 
-#unhiddenInfo div div h2 {
-    padding-bottom: 3%;
-    text-align: center;
+#unhiddenInfo {
+    max-height: 50vh;
+    margin-bottom: 20px;
 }
+
+    #unhiddenInfo > div {
+        padding-left: 20px;
+    }
+
+    #unhiddenInfo div .album__cover {
+        max-height: 40vh;
+        max-width: 40vh;
+    }
+
+    #unhiddenInfo div div h2 {
+        padding-bottom: 3%;
+        text-align: center;
+    }
 
 #hiddenInfo div img {
     max-height: 30vh;
     max-width: 30vh;
+}
+
+    #hiddenInfo div img:hover {
+        cursor: pointer;
+    }
+
+
+
+
+/*----Video----*/
+.video-album .photo-album {
+    height: 40vh;
+}
+
+
+
+.video-album p {
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.video-album img {
+    max-width: 16vh;
+}
+
+.video-album div h4 {
+    text-align: center;
+}
+
+.video-album div {
+    padding-bottom: 3%;
+}
+
+
+.video-player {
+    max-width: 100%;
+}
+
+    .video-player:hover {
+        cursor: pointer;
+    }
+
+.video-container {
+    position: center;
+}
+
+.video-row {
+    max-height: 41vh;
+}
+
+/*--------Photo-----------*/
+#unhiddenInfo > .row {
+    margin-right: 0;
+}
+
+#unhiddenInfo > div > div {
+    height: 50vh;
+}
+
+    #unhiddenInfo > div > div > img {
+        display: none;
+    }
+
+#unhiddenInfo > div > div {
+}
+
+    #unhiddenInfo > div > div > p {
+        transform: rotate(270deg);
+        position: absolute;
+        bottom: 55%;
+    }
+
+    #hiddenInfo > div > div > p, #unhiddenInfo > div > div > p {
+        font-size: 20px;
+        color: #fff;
+        text-align: center;
+    }
+
+#hiddenInfo > div {
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+#hiddenInfo {
+    display: flex;
+}
+
+.mini-photo {
+    width: 155px;
+}
+
+
+#grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-auto-flow: row;
+    grid-gap: 1vw;
+    max-height: 90%;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+    #grid > div {
+    }
+
+h4 {
+    text-align: center;
+    padding: 10px;
+}
+
+.photo-album_cover {
+    width: 30vh;
+}
+
+    .photo-album_cover:hover {
+        cursor: pointer;
+    }
+
+#unhiddenInfo > div > div > p:hover {
+    cursor: pointer;
 }

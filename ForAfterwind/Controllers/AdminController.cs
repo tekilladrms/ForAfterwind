@@ -296,7 +296,7 @@ namespace ForAfterwind.Controllers
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
-                musician.Photo = $"{_appEnvironment.WebRootPath}{path}";
+                musician.Photo = path;
             }
             db.Musicians.Update(musician);
             await db.SaveChangesAsync();
@@ -542,10 +542,13 @@ namespace ForAfterwind.Controllers
                 Musician musician = await db.Musicians.FirstOrDefaultAsync(p => p.Id == id);
                 if (musician != null)
                 {
+
                     DeleteRelatedEntities(id);
                     db.Musicians.Remove(musician);
                     await db.SaveChangesAsync();
+                    DeleteFileFromDirectory(musician.Photo);
                     return RedirectToAction("Musician");
+                    
                 }
             }
             return NotFound();
@@ -556,8 +559,14 @@ namespace ForAfterwind.Controllers
             if (id != null)
             {
                 Release release = await db.Releases.FirstOrDefaultAsync(x => x.Id == id);
+                
                 if (release != null)
                 {
+                    foreach(var song in db.Songs.Where(x => x.ReleaseId == id))
+                    {
+                        db.Songs.Remove(song);
+                        DeleteFileFromDirectory(song.PathToSong);
+                    }
                     db.Releases.Remove(release);
                     await db.SaveChangesAsync();
                     DeleteDirectory(release.PathToCover);
@@ -575,6 +584,11 @@ namespace ForAfterwind.Controllers
                 VideoAlbum videoAlbum = await db.VideoAlbums.FirstOrDefaultAsync(x => x.Id == id);
                 if (videoAlbum != null)
                 {
+                    foreach (var video in db.Videos.Where(x => x.VideoAlbumId == id))
+                    {
+                        db.Videos.Remove(video);
+                        DeleteFileFromDirectory(video.PathToVideo);
+                    }
                     db.VideoAlbums.Remove(videoAlbum);
                     await db.SaveChangesAsync();
                     DeleteDirectory(videoAlbum.PathToCover);
@@ -591,10 +605,15 @@ namespace ForAfterwind.Controllers
                 PhotoAlbum photoAlbum = await db.PhotoAlbums.FirstOrDefaultAsync(x => x.Id == id);
                 if (photoAlbum != null)
                 {
+                    foreach (var photo in db.Photos.Where(x => x.PhotoAlbumId == id))
+                    {
+                        db.Photos.Remove(photo);
+                        DeleteFileFromDirectory(photo.PathToPhoto);
+                    }
                     db.PhotoAlbums.Remove(photoAlbum);
                     await db.SaveChangesAsync();
                     DeleteDirectory(photoAlbum.PathToCover);
-                    return RedirectToAction("Video");
+                    return RedirectToAction("Photo");
                 }
             }
             return NotFound();
@@ -668,11 +687,14 @@ namespace ForAfterwind.Controllers
 
         void DeleteDirectory(string path)
         {
-            string directoryName = Path.GetDirectoryName(path);
-            string fullPath = _appEnvironment.WebRootPath + directoryName;
-            
-            if(Directory.Exists(fullPath))
-            Directory.Delete(fullPath, true);
+            if(path != null)
+            {
+                string directoryName = Path.GetDirectoryName(path);
+                string fullPath = _appEnvironment.WebRootPath + directoryName;
+
+                if (Directory.Exists(fullPath))
+                    Directory.Delete(fullPath, true);
+            }
 
         }
 

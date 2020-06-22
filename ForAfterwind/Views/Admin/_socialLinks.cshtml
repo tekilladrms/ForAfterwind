@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ForAfterwind.Domain.SocialLink>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<label class="control-label">Links</label>
+<ul>
+    @foreach (var el in Model)
+    {
+    <li>
+        <a onclick="displayForm(@el.Id)">
+            <i class="fa fa-@Url.Content(el.Name)"></i>
+        </a>
+        @el.Path
+
+        <a asp-action="DeleteLink"
+           asp-route-id="@el.Id"
+           data-ajax="true"
+           data-ajax-update="#ajaxlinks"
+           data-ajax-complete="removeLinksFormEvents()">
+            Delete
+        </a>
+        @*data-ajax="true"*@
+        @*data-ajax-update="#ajaxlinks"*@
+        @*data-ajax-complete="removeLinksFormEvents()"*@
+        @*<div id="@el.Id"
+             class="hidden">
+            
+            <input type="hidden" asp-for="@el.Id" />
+
+            <div class="form-group">
+                <label asp-for="@el.Name" class="control-label">Name</label>
+                <input asp-for="@el.Name" class="form-control" id="name_@el.Id" />
+                <span asp-validation-for="@el.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@el.Path" class="control-label">Url</label>
+                <input asp-for="@el.Path" class="form-control" id="path_@el.Id" />
+                <span asp-validation-for="@el.Path" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="button"
+                       value="Save"
+                       class="btn btn-primary"
+                       onclick="saveLink(@el.Id, @el.MusicianId)"
+                       data-ajax="true" 
+                       data-ajax-update="#ajaxlinks" 
+                        />
+                        
+            </div>
+        </div>*@
+
+
+
+    </li>
+    }
+</ul>

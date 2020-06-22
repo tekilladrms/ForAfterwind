@@ -10,7 +10,11 @@ namespace ForAfterwind.Controllers
 {
     public class MediaController : Controller
     {
-        AppDbContext db = new AppDbContext();
+        AppDbContext db;
+        public MediaController(AppDbContext context)
+        {
+            db = context;
+        }
 
         public IActionResult Index()
         {

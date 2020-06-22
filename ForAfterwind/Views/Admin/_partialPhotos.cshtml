@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ForAfterwind.Domain.Photo>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h4>Photos</h4>
+<hr />
+<div class="form-group">
+
+    <div class="row photo overflow-auto">
+        @foreach (var el in Model)
+        {
+            <div class="col-md-4">
+                <div class="photo-container">
+                    <img src="@Url.Content(el.PathToPhoto)" alt="" />
+                    <a asp-action="DeletePhoto"
+                       asp-controller="Admin"
+                       asp-route-id="@el.Id"
+                       data-ajax="true"
+                       data-ajax-update="#ajaxphotos"
+                       data-ajax-complete="removePhotosFormEvents()">Delete</a>
+                    <hr />
+                </div>
+            </div>
+
+        }
+    </div>
+
+</div>
+<hr />
+
+

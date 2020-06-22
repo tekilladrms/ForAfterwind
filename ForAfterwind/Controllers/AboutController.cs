@@ -10,10 +10,10 @@ namespace ForAfterwind.Controllers
 {
     public class AboutController : Controller
     {
-        AppDbContext db = new AppDbContext();
-        public AboutController()
+        AppDbContext db;
+        public AboutController(AppDbContext context)
         {
-            
+            db = context;
         }
         public IActionResult Band()
         {

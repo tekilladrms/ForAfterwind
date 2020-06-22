@@ -1,0 +1,76 @@
+﻿@model ForAfterwind.Domain.Release
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_AdminLayout";
+}
+
+<h1>EditRelease</h1>
+
+<h4>Release</h4>
+<hr />
+<div class="row">
+    <div class="col-md-2 release__cover">
+        <img src="@Url.Content(Model.PathToCover)" alt="" id="output" />
+    </div>
+    <div class="col-md-4">
+        <form asp-action="EditRelease"
+              method="post"
+              enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <hr />
+            <label class="control-label">Выберите обложку</label>
+            <input type="file" name="uploadedFile" accept="image/*" /><br>
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-5">
+        <form asp-action="_partialSongs"
+              asp-route-id="@Model.Id"
+              method="get" data-ajax="true"
+              data-ajax-update="#ajaxsongs"
+              id="songs">
+
+            <div id="ajaxsongs">
+
+            </div>
+        </form>
+        <form asp-action="AddSongs"
+              method="post"
+              enctype="multipart/form-data"
+              data-ajax="true"
+              data-ajax-update="#ajaxsongs"
+              data-ajax-complete="removeSongsFormEvents()"
+              >
+
+            <input type="hidden" asp-for="@Model.Id" />
+            <h4>Add Song</h4>
+            
+            <div class="form-group">
+                <label class="control-label">Выберите файл для загрузки</label>
+                <input type="file" name="uploadedFiles" multiple
+                       accept="audio/mp3, audio/aac, audio/wav,
+                       video/mp4, video/avi, video/webm" />
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Add</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

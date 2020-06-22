@@ -4,7 +4,7 @@
     Layout = "_AdminLayout";
 }
 
-<h1>EditRelease</h1>
+<h1>Edit release</h1>
 
 <h4>Release</h4>
 <hr />
@@ -50,6 +50,7 @@
               data-ajax="true"
               data-ajax-update="#ajaxsongs"
               data-ajax-complete="removeSongsFormEvents()"
+              id="addsongs"
               >
 
             <input type="hidden" asp-for="@Model.Id" />

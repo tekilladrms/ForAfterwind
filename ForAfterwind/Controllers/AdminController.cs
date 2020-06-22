@@ -193,7 +193,7 @@ namespace ForAfterwind.Controllers
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
-                release.PathToCover = "~" + path;
+                release.PathToCover = path;
             }
             db.Releases.Update(release);
             await db.SaveChangesAsync();

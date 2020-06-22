@@ -58,7 +58,7 @@
             <input type="hidden" asp-for="@Model.Id" id="modelId" />
             <h4>Add Photos</h4>
             <label class="control-label">Выберите файлы для загрузки</label>
-            <input type="file" multiple name="files"/>
+            <input type="file" multiple name="files" accept="image/*"/>
             <button class="btn btn-primary" type="submit" >Add</button>
             @*<div class="form-group">
             <button type="submit" value="Add" class="btn btn-primary" style="margin-top: 15px" />

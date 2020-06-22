@@ -25,6 +25,7 @@
                     <img src="@Url.Content(Model.PathToCover)" alt="" id="output" />
                 </div>
             }
+            <hr />
             <label class="control-label">Выберите обложку</label>
             <input type="file" name="uploadedFile" accept="image/*" /><br>
             <hr />
@@ -35,7 +36,7 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <hr />
-            
+
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <textarea asp-for="Description" class="form-control"></textarea>
@@ -70,7 +71,7 @@
             <h4>Add video</h4>
             <div class="form-group">
                 <label class="control-label">Выберите файл</label>
-                <input type="file" name="uploadedFile" />
+                <input type="file" name="uploadedFile" accept="video/*"/>
 
             </div>
             

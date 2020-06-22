@@ -1,0 +1,46 @@
+﻿@model ForAfterwind.Domain.Release
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "CreateRelease";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>CreateRelease</h1>
+
+<h4>Release</h4>
+<hr />
+<div class="row">
+    @if (Model != null)
+    {
+        <div class="col-md-2 release__cover">
+            <img src="@Url.Content(Model.PathToCover)" alt="" id="output" />
+        </div>
+    }
+    <div class="col-md-4">
+        <form asp-action="CreateRelease"
+              method="post"
+              enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <label class="control-label">Выберите обложку</label>
+            <input type="file" name="uploadedFile" accept="image/*" /><br>
+            <hr />
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

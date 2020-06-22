@@ -1,0 +1,122 @@
+﻿@model ForAfterwind.Domain.Musician
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "_AdminLayout";
+}
+<h4>@Model.Name</h4>
+<hr />
+<div class="row">
+    <div class="col-md-3">
+        <form asp-action="EditMusician"
+              asp-controller="Admin"
+              method="post"
+              enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <label class="control-label">Path to photo</label>
+            <input type="file" name="uploadedFile" /><br>
+            <hr />
+            <div id="musicianphoto">
+                <img class="musician-photo" src="@Url.Content(Model.Photo)" alt="" />
+            </div>
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <button asp-action="DeleteMusician"
+                        class="btn btn-danger"
+                        method="get" asp-route-id="@Model.Id">
+                    Delete musician
+                </button>
+                
+            </div>
+        </form>
+        
+    </div>
+    
+    @* skills *@
+    <div class="col-md-3">
+        <form asp-action="_partialSkills"
+              asp-route-id="@Model.Id"
+              method="get" data-ajax="true" 
+              data-ajax-update="#ajaxskills" 
+              id="skills">
+
+            <div id="ajaxskills">
+
+            </div>
+        </form>
+        <hr />
+        <form asp-action="CreateSkill" 
+              data-ajax="true" method="post"
+              data-ajax-update="#ajaxskills" 
+              id="addskill"
+              data-ajax-mode="replace" 
+              data-ajax-complete="removeSkillsFormEvents()">
+
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="form-group">
+                <label class="control-label">Add Skill</label>
+                <input type="text" name="name" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+
+
+    @* links *@
+    <div class="col-md-4 overflow-auto">
+        <form asp-action="_socialLinks"
+              asp-route-id="@Model.Id"
+              method="get" data-ajax="true"
+              data-ajax-update="#ajaxlinks" 
+              id="links">
+
+            <div id="ajaxlinks">
+
+            </div>
+        </form>
+        <hr />
+        <form asp-action="CreateLink" 
+              data-ajax="true" method="post"
+              data-ajax-update="#ajaxlinks" 
+               data-ajax-mode="replace"
+              id="addlink"
+              data-ajax-complete="removeLinksFormEvents()">
+
+            <input type="hidden" asp-for="@Model.Id" />
+
+            <div class="form-group">
+
+                <label class="control-label">Name</label>
+                <input type="text" name="name" class="form-control" />
+
+                <label class="control-label">Url</label>
+                <input type="text" name="url" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Musician">Back to List</a>
+</div>
+

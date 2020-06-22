@@ -10,7 +10,7 @@ namespace ForAfterwind.Domain
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        //public AppDbContext(DbContextOptions options) : base(options) { }
+        public AppDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Musician> Musicians { get; set; }
 
@@ -31,19 +31,6 @@ namespace ForAfterwind.Domain
         public DbSet<Photo> Photos { get; set; }
 
         
-
-       
-
-
-        public AppDbContext()
-        {
-            
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB; Database=Db_Afterwind; Persist Security Info=false; MultipleActiveResultSets=True; Trusted_Connection=true;");
-        }
         
     }
 }

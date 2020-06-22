@@ -1,0 +1,68 @@
+﻿@model ForAfterwind.Domain.PhotoAlbum
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "EditPhotoAlbum";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>EditPhotoAlbum</h1>
+
+
+<h4>@Model.Name</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4 release__cover">
+        <img src="@Url.Content(Model.PathToCover)" alt="" id="output" />
+        <form asp-action="EditPhotoAlbum"
+              method="post"
+              enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <hr />
+            <label class="control-label">Выберите обложку</label>
+            <input type="file" name="uploadedFile" accept="image/*" /><br>
+            <hr />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Название альбома</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-md">
+        <form asp-action="_partialPhotos"
+              asp-route-id="@Model.Id"
+              method="get" data-ajax="true"
+              data-ajax-update="#ajaxphotos"
+              id="photos">
+            <div id="ajaxphotos">
+
+            </div>
+        </form>
+        <form asp-action="AddPhotos"
+              asp-controller="Admin"
+              data-ajax="true"
+              data-ajax-update="#ajaxphotos"
+              data-ajax-complete="removePhotosFormEvents()"
+              method="post"
+              enctype="multipart/form-data"
+              id="addphotos"
+              >
+            <input type="hidden" asp-for="@Model.Id" id="modelId" />
+            <h4>Add Photos</h4>
+            <label class="control-label">Выберите файлы для загрузки</label>
+            <input type="file" multiple name="files"/>
+            <button class="btn btn-primary" type="submit" >Add</button>
+            @*<div class="form-group">
+            <button type="submit" value="Add" class="btn btn-primary" style="margin-top: 15px" />
+        </div>*@
+        </form>
+    </div>
+</div>

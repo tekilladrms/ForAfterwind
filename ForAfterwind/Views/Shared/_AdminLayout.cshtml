@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="~/libs/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Admin.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 background__dark left-panel">
+                <ul>
+                    <li>
+                        @Html.ActionLink("Musicians", "Musician", "Admin")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Releases", "Audio", "Admin")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Video", "Video", "Admin")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Photo", "Photo", "Admin")
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/libs/jquery/jquery-3.4.1.min.js"></script>
+    <script src="~/libs/jquery/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/js/Admin.js"></script>
+</body>
+</html>

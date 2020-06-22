@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ForAfterwind.Domain.Video>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+    <div class="form-group videos">
+        
+        
+        <div class="row video-row overflow-auto">
+            @foreach (var el in Model)
+            {
+            <div class="col-md-5">
+                <div class="video-container">
+                    <p>@el.Name</p>
+                    <video class="video-player" src="@Url.Content(el.PathToVideo)" controls="controls" controlsList="nodownload"></video>
+                </div>
+
+                <a asp-action="DeleteVideo"
+                   asp-route-id="@el.Id"
+                   data-ajax="true"
+                   data-ajax-update="#ajaxvideos"
+                   data-ajax-complete="removeVideosFormEvents()">Delete</a>
+                <hr />
+            </div>
+            }
+        </div>
+    </div>

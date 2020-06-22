@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ForAfterwind.Domain.Song>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="form-group songs overflow-auto">
+    <label class="control-label">Songs</label>
+    <ul>
+        @foreach (var el in Model)
+        {
+            <li>
+
+                @if (el.Type.Value.ToString() == "Audio")
+                {
+                    <div class="audio-player">
+                        <p>@el.Name</p>
+                        <audio id="audio-player" src="@Url.Content(el.PathToSong)" type="audio/mp3" controls="controls" controlsList="nodownload"></audio>
+                    </div>
+                }
+                else
+                {
+                    <div class="video-container">
+                        <p>@el.Name</p>
+                        <video class="video-player" src="@Url.Content(el.PathToSong)" controls="controls" controlsList="nodownload"></video>
+                    </div>
+                }
+
+                <a asp-action="DeleteSong"
+                   asp-route-id="@el.Id"
+                   data-ajax="true"
+                   data-ajax-update="#ajaxsongs"
+                   data-ajax-complete="removeSongsFormEvents()">Delete</a>
+                <hr />
+            </li>
+
+        }
+    </ul>
+</div>

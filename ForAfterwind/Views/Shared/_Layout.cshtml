@@ -12,23 +12,32 @@
     <link rel="stylesheet" href="~/libs/owlcarousel2/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="~/libs/fancybox/jquery.fancybox.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    
+
     <link rel="stylesheet" href="~/fonts/Main_font.ttf" />
-    
+
 
 </head>
 <body>
-    <div class="container-fluid background__dark">
+    <div class="background__dark">
         <div class="container wrapper">
             <div class="row">
-                <div class="d-flex col-lg-2 offset-1">
+                <div class="d-flex col-lg-2 col-sm offset-lg-1 justify-content-sm-center">
                     <div class="logo">
                         <a href="#">
-                            <img src="~/img/Logo_word.png" width="200" height="60" />
+                            <img src="~/img/Logo_word.png" />
                         </a>
                     </div>
+                    @* -----------Кнопка для мобильной навигации-------------- *@
+                    <button type="button"
+                            class="navbar-toggle collapsed"
+                            data-toggle="collapse"
+                            data-target="#navbar-main">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                 </div>
-                <div class="col-lg-auto offset-lg-1">
+                <div class="col-lg-auto offset-lg-1 parent__menu">
                     <ul class="menu d-flex justify-content-center">
                         <li>
                             @Html.ActionLink("Home", "Index", "Home")
@@ -48,7 +57,7 @@
                         </li>
 
                         <li>
-                            
+
                             <a href="#">Media</a>
                             <ul>
                                 <li>
@@ -74,11 +83,11 @@
                         </li>
                     </ul>
                 </div>
-                
+
             </div>
         </div>
     </div>
-    
+
 
     <div class="container content">
         <div class="left">
@@ -121,12 +130,16 @@
                 </li>
             </ul>
         </div>
-        <div class="right">
-            @RenderBody()
+        <div class="row">
+            <div class="col-md">
+                <div class="right">
+                    @RenderBody()
+                </div>
+            </div>
         </div>
-        
+
     </div>
-    
+
 
     <script src="~/libs/jquery/jquery-3.4.1.min.js"></script>
     <script src="~/libs/fancybox/jquery.fancybox.pack.js"></script>

@@ -16,7 +16,7 @@ body {
 
 .wrapper {
     min-height: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 35px;
 }
 
 .background__dark {
@@ -29,6 +29,131 @@ body {
 
 h1, h2, h3, h4 {
     color: #fff;
+}
+
+/*media queries*/
+
+
+
+@media screen and (min-width: 1351px) {
+    .left {
+        top: 30%;
+        left: 0;
+    }
+
+        .left ul {
+            display: block;
+        }
+
+    #unhiddenInfo div .album__cover {
+        max-height: 40vh;
+    }
+
+    #hiddenInfo div img {
+        width: 100%;
+    }
+    /*.photo-album{
+        max-width: 25vh;
+    }*/
+    .photos {
+        max-height: 60vh;
+    }
+}
+
+@media screen and (max-width: 1350px) {
+    body {
+        overflow: auto;
+    }
+
+    .left {
+        bottom: 0;
+        left: 35%;
+    }
+
+        .left ul {
+            display: flex;
+        }
+
+            .left ul li {
+                padding-left: 4%;
+                padding-right: 4%;
+            }
+
+    .wrapper {
+        margin-bottom: 35px;
+    }
+
+    #unhiddenInfo div .album__cover {
+        max-height: 30vh;
+    }
+
+    #hiddenInfo div .album__cover {
+        width: 70%;
+    }
+
+    .info-audio__content {
+        position: relative;
+        left: 10%;
+    }
+
+        .info-audio__content h2 {
+            font-size: 1.5rem;
+        }
+    /*.photo-album {
+        width: 40vh;
+    }*/
+    .photos {
+        max-height: 45vh;
+    }
+
+    .photo-album_cover {
+        width: 30vh;
+    }
+
+    .video-row {
+        height: 33vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    body {
+        background-image: url("../img/bg_mobile(752x1078).jpg");
+    }
+
+    .left {
+        left: 30%;
+    }
+
+    /*menu*/
+
+    .parent__menu {
+        display: none;
+    }
+
+    .burger__menu {
+        display: flex;
+    }
+
+    .logo {
+    }
+
+    
+    .navbar-default .navbar-toggle .icon-bar {
+        
+    }
+    .navbar-toggle {
+        background-color: #888;
+        width: 10vh;
+        height: 10vh;
+    }
+        .navbar-toggle .icon-bar {
+            display: block;
+            width: 22px;
+            height: 2px;
+            border-radius: 1px;
+            background-color: #fff;
+        }
 }
 
 
@@ -64,9 +189,12 @@ h1, h2, h3, h4 {
 
 .logo {
     margin-top: 10px;
-    width: 200px;
-    height: 70px;
+    width: 30vh;
 }
+
+    .logo a img {
+        width: 25vh;
+    }
 
 .menu li ul {
     position: absolute;
@@ -94,6 +222,7 @@ h1, h2, h3, h4 {
     padding-left: 30px;
     margin-top: 30px;
     padding-bottom: 0;
+    z-index: 9999;
 }
 
     .menu li a, .links__item a {
@@ -126,12 +255,10 @@ h1, h2, h3, h4 {
 /*--------------- Left Sidebar ---------------*/
 
 .left {
-    height: 100%;
+    /*height: 100%;*/
     white-space: nowrap;
     transition: width 0.5s;
     position: fixed;
-    left: 0;
-    top: 30%;
     z-index: 9999;
 }
 
@@ -290,7 +417,7 @@ h1, h2, h3, h4 {
 /*------------- MEDIA --------------*/
 /*----Audio----*/
 audio {
-    width: 400px;
+    width: 45vh;
     height: 30px;
 }
 
@@ -307,6 +434,10 @@ audio {
         margin-top: 16px;
     }
 
+.audio-container {
+    height: 32vh;
+}
+
 .album {
     overflow: hidden;
 }
@@ -317,7 +448,7 @@ audio {
 }
 
 #unhiddenInfo {
-    max-height: 50vh;
+    /*max-height: 50vh;*/
     margin-bottom: 20px;
 }
 
@@ -325,23 +456,21 @@ audio {
         padding-left: 20px;
     }
 
-    #unhiddenInfo div .album__cover {
+    /*#unhiddenInfo div .album__cover {
         max-height: 40vh;
         max-width: 40vh;
-    }
+    }*/
 
     #unhiddenInfo div div h2 {
         padding-bottom: 3%;
         text-align: center;
     }
 
-#hiddenInfo div img {
-    width: 100%;
-}
 
-    #hiddenInfo div img:hover {
-        cursor: pointer;
-    }
+
+#hiddenInfo div img:hover {
+    cursor: pointer;
+}
 
 
 
@@ -393,13 +522,13 @@ audio {
     margin-right: 0;
 }
 
-#unhiddenInfo > div > div {
+/*#unhiddenInfo > div > div {
     height: 50vh;
-}
+}*/
 
-    #unhiddenInfo > div > div > img {
-        display: none;
-    }
+#unhiddenInfo > div > div > img {
+    display: none;
+}
 
 #unhiddenInfo > div > div {
 }

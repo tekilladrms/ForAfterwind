@@ -13,23 +13,33 @@
             {
                 continue;
             }
-            <div class="col-md-3 d-flex album scale">
-                <img class="album__cover" src="@Url.Content(el.PathToCover)" alt="@el.Name" onclick="showAlbum(this)" />
+            <div class="col-sm-6 col-md-3 d-flex album scale">
+                <img class="album__cover"
+                     src="@Url.Content(el.PathToCover)"
+                     alt="@el.Name" onclick="showAlbum(this)" 
+                     />
                 <div class="info hidden">
-                    <h2>@el.Name</h2>
+                    <div class="info-audio__content">
+                        <h2>@el.Name</h2>
+                        <div class="audio-container overflow-auto">
+                            @foreach (var item in el.Songs)
+                            {
+                                @if (item.Type.Value.ToString() == "Video")
+                                {
+                                    continue;
+                                }
+                                <div class="audio-player">
+                                    <p>@item.Name</p>
+                                    <audio id="audio-player"
+                                           src="@Url.Content(item.PathToSong)"
+                                           type="audio/mp3" controls="controls"
+                                           controlsList="nodownload">
+                                    </audio>
+                                </div>
 
-                    @foreach (var item in el.Songs)
-                    {
-                        @if (item.Type.Value.ToString() == "Video")
-                        {
-                            continue;
-                        }
-                        <div class="audio-player">
-                            <p>@item.Name</p>
-                            <audio id="audio-player" src="@Url.Content(item.PathToSong)" type="audio/mp3" controls="controls" controlsList="nodownload"></audio>
+                            }
                         </div>
-
-                    }
+                    </div>
 
                 </div>
             </div>

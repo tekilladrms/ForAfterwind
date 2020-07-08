@@ -34,6 +34,8 @@
     <Compile Remove="Migrations\20200520084902_AddVideoAlbumId.Designer.cs" />
     <Compile Remove="Migrations\20200523070406_AddPhotoAndPhotoAlbums.cs" />
     <Compile Remove="Migrations\20200523070406_AddPhotoAndPhotoAlbums.Designer.cs" />
+    <Compile Remove="Migrations\20200704115958_AddingCoverToPosts.cs" />
+    <Compile Remove="Migrations\20200704115958_AddingCoverToPosts.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +44,7 @@
 
   <ItemGroup>
     <PackageReference Include="de.lkraemer.nemmet" Version="1.0.2" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.20.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.2.0" />

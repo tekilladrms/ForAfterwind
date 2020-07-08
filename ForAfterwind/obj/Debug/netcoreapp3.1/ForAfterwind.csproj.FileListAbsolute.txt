@@ -173,6 +173,16 @@ C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\Mi
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\CreatePhotoAlbum.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Blog.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\CreatePost.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditPost.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\Magick.NET-Q16-AnyCPU.dll
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\Magick.NET.Core.dll
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\Magick.Native-Q16-x64.dll.so
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\Magick.Native-Q16-x64.dll.dylib
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Magick.Native-Q16-x64.dll
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Magick.Native-Q16-x86.dll
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\ForAfterwind.csproj.CoreCompileInputs.cache
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\ForAfterwind.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\CreatePhotoAlbum.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Article.cshtml.g.cs

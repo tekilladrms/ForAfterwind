@@ -1,5 +1,30 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-    <p>Blog is coming soon</p>
+﻿@model IEnumerable<ForAfterwind.Domain.Post>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="row blog__container background__dark overflow-auto">
+
+    @foreach (var el in Model)
+    {
+        <div class="col-lg-3 col-sm-4 post__preview">
+            <a asp-action="Article"
+               asp-controller="Blog"
+               asp-route-id="@el.Id" >
+
+                @* Конвертируем обложку(byte[]) в Base64 для отображения *@
+                @{ 
+                    var base64 = Convert.ToBase64String(el.Cover);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                <img class="img-thumbnail post__preview-img background__darkest" src="@imgSrc" />
+                <div class="post__preview-title">
+                    <h3 class=" background__dark">@el.Title</h3>
+                </div>
+
+            </a>
+        </div>
+    }
+
+</div>
+
+
+

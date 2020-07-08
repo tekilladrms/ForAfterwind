@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ForAfterwind.Domain;
+using ImageMagick;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +61,11 @@ namespace ForAfterwind.Controllers
                 .Include(x => x.SocialLinks);
 
             return View(musicians);
+        }
+
+        public IActionResult Blog()
+        {
+            return View(db.Posts.AsNoTracking());    
         }
 
         // CRUD
@@ -261,20 +267,78 @@ namespace ForAfterwind.Controllers
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
-                photoAlbum.PathToCover = "~" + path;
+                photoAlbum.PathToCover = path;
             }
             db.PhotoAlbums.Update(photoAlbum);
             await db.SaveChangesAsync();
             return RedirectToAction("Photo");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditPost(int? id)
+        {
+            return View(await db.Posts.FirstOrDefaultAsync(post => post.Id == id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPost(Post newPost, IFormFile uploadedFile)
+        {
+            var oldPost = await db.Posts.FirstOrDefaultAsync(post => post.Id == newPost.Id);
+
+            oldPost.Title = newPost.Title;
+            oldPost.ShortDescription = newPost.ShortDescription;
+            oldPost.Description = newPost.Description;
+            oldPost.Modified = DateTime.Now;
+            oldPost.Meta = newPost.Meta;
+            oldPost.Tags = newPost.Tags;
+            oldPost.UrlSlug = GetUrlSlug(newPost.Title);
+
+            if(uploadedFile != null)
+            {
+                oldPost.CoverMimeType = uploadedFile.ContentType;
+                oldPost.Cover = await ResizeImageAsync(uploadedFile);
+            }
+
+            db.Posts.Update(oldPost);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Blog");
+        }
+
         //Create
+
+        [HttpGet]
+        public IActionResult CreatePost()
+        {
+            Post post = new Post();
+            
+            return View(post);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePost(Post post, IFormFile uploadedFile)
+        {
+            post.PostedOn = DateTime.Now;
+            post.Modified = DateTime.Now;
+            post.UrlSlug = GetUrlSlug(post.Title);
+
+            if(uploadedFile != null)
+            {
+                post.CoverMimeType = uploadedFile.ContentType;
+                post.Cover = await ResizeImageAsync(uploadedFile);
+            }
+            
+            db.Posts.Add(post);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Blog");
+        }
 
         [HttpGet]
         public IActionResult CreateMusician()
         {
-            Musician musician = new Musician();
-            musician = db.Musicians.FirstOrDefault(x => x.Name == "New");
+            Musician musician = db.Musicians.FirstOrDefault(x => x.Name == "New");
+            
 
             if (musician != null)
             {
@@ -619,6 +683,14 @@ namespace ForAfterwind.Controllers
             return NotFound();
         }
 
+        public async Task<IActionResult> DeletePost(int? id)
+        {
+            var deletingPost = await db.Posts.FirstOrDefaultAsync(post => post.Id == id);
+            db.Posts.Remove(deletingPost);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Blog");
+        }
+
 
         public void DeleteSkill(int? id)
         {
@@ -698,6 +770,41 @@ namespace ForAfterwind.Controllers
 
         }
 
-        
+        protected async Task<byte[]> FileToByteAsync(IFormFile file)
+        {
+            byte[] image = null;
+            if (file != null)
+            {
+                using (var fileStream = file.OpenReadStream())
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await fileStream.CopyToAsync(memoryStream);
+                        image = memoryStream.ToArray();
+                    }
+
+                }
+            }
+            return image;
+        }
+
+        protected async Task<byte[]> ResizeImageAsync(IFormFile image)
+        {
+            if (image.Length > 0)
+            {
+                using (MagickImage thumbnail = new MagickImage(await FileToByteAsync(image)))
+                {
+                    thumbnail.Resize(250, 150);
+                    return thumbnail.ToByteArray();
+                }
+            }
+            return null;
+        }
+
+        protected string GetUrlSlug(string postTitle)
+        {
+            return String.Join("_", postTitle.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+        }
+
     }
 }

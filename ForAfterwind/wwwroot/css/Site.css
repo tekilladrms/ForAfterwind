@@ -31,130 +31,7 @@ h1, h2, h3, h4 {
     color: #fff;
 }
 
-/*media queries*/
 
-
-
-@media screen and (min-width: 1351px) {
-    .left {
-        top: 30%;
-        left: 0;
-    }
-
-        .left ul {
-            display: block;
-        }
-
-    #unhiddenInfo div .album__cover {
-        max-height: 40vh;
-    }
-
-    #hiddenInfo div img {
-        width: 100%;
-    }
-    /*.photo-album{
-        max-width: 25vh;
-    }*/
-    .photos {
-        max-height: 60vh;
-    }
-}
-
-@media screen and (max-width: 1350px) {
-    body {
-        overflow: auto;
-    }
-
-    .left {
-        bottom: 0;
-        left: 35%;
-    }
-
-        .left ul {
-            display: flex;
-        }
-
-            .left ul li {
-                padding-left: 4%;
-                padding-right: 4%;
-            }
-
-    .wrapper {
-        margin-bottom: 35px;
-    }
-
-    #unhiddenInfo div .album__cover {
-        max-height: 30vh;
-    }
-
-    #hiddenInfo div .album__cover {
-        width: 70%;
-    }
-
-    .info-audio__content {
-        position: relative;
-        left: 10%;
-    }
-
-        .info-audio__content h2 {
-            font-size: 1.5rem;
-        }
-    /*.photo-album {
-        width: 40vh;
-    }*/
-    .photos {
-        max-height: 45vh;
-    }
-
-    .photo-album_cover {
-        width: 30vh;
-    }
-
-    .video-row {
-        height: 33vh;
-    }
-}
-
-@media screen and (max-width: 768px) {
-
-    body {
-        background-image: url("../img/bg_mobile(752x1078).jpg");
-    }
-
-    .left {
-        left: 30%;
-    }
-
-    /*menu*/
-
-    .parent__menu {
-        display: none;
-    }
-
-    .burger__menu {
-        display: flex;
-    }
-
-    .logo {
-    }
-
-    
-    .navbar-default .navbar-toggle .icon-bar {
-        
-    }
-    .navbar-toggle {
-        background-color: #888;
-        width: 10vh;
-        height: 10vh;
-    }
-        .navbar-toggle .icon-bar {
-            display: block;
-            width: 22px;
-            height: 2px;
-            border-radius: 1px;
-            background-color: #fff;
-        }
-}
 
 
 /*----Scrollbar----*/
@@ -588,4 +465,186 @@ h4 {
 
 #unhiddenInfo > div > div > p:hover {
     cursor: pointer;
+}
+
+/*BLOG*/
+
+.blog__container {
+    max-height: 75vh;
+}
+
+.post__preview a {
+    text-decoration: none;
+}
+
+.post__preview {
+    padding: 2% 2% 2% 2%;
+}
+
+.post__preview-img {
+    height: 15vh;
+    width: 100%;
+}
+
+
+.post__preview-title {
+    position: relative;
+    bottom: 35px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+    .post__preview-title h3 {
+        text-align: center;
+    }
+
+
+
+
+
+
+
+
+
+/*media queries*/
+@media screen and (min-width: 1351px) {
+    .mobile__menu {
+        display: none;
+    }
+
+    .left {
+        top: 30%;
+        left: 0;
+    }
+
+        .left ul {
+            display: block;
+        }
+
+    #unhiddenInfo div .album__cover {
+        max-height: 40vh;
+    }
+
+    #hiddenInfo div img {
+        width: 100%;
+    }
+    /*.photo-album{
+        max-width: 25vh;
+    }*/
+    .photos {
+        max-height: 60vh;
+    }
+
+    /*.blog__container {
+        max-height: 65vh;
+    }*/
+}
+
+@media screen and (max-width: 1350px) {
+    body {
+        overflow: auto;
+    }
+
+    .mobile__menu {
+        display: none;
+    }
+
+    .left {
+        bottom: 0;
+        left: 35%;
+    }
+
+        .left ul {
+            display: flex;
+        }
+
+            .left ul li {
+                padding-left: 4%;
+                padding-right: 4%;
+            }
+
+    .wrapper {
+        margin-bottom: 35px;
+    }
+
+    #unhiddenInfo div .album__cover {
+        max-height: 30vh;
+    }
+
+    #hiddenInfo div .album__cover {
+        width: 70%;
+    }
+
+    .info-audio__content {
+        position: relative;
+        left: 10%;
+    }
+
+        .info-audio__content h2 {
+            font-size: 1.5rem;
+        }
+    /*.photo-album {
+        width: 40vh;
+    }*/
+    .photos {
+        max-height: 45vh;
+    }
+
+    .photo-album_cover {
+        width: 30vh;
+    }
+
+    .video-row {
+        height: 33vh;
+    }
+
+    .blog__container {
+        max-height: 65vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    body {
+        background-image: url("../img/bg_mobile(752x1078).jpg");
+    }
+
+    .left {
+        left: 30%;
+    }
+
+    /*menu*/
+
+    .parent__menu {
+        display: none;
+    }
+
+    .burger__menu {
+        display: flex;
+    }
+
+    .logo {
+    }
+
+
+    .mobile__menu {
+        display: flex;
+    }
+
+        .mobile__menu:hover {
+            cursor: pointer;
+        }
+
+    .mobile__menu-toggle {
+        max-width: 70px;
+        max-height: 70px;
+    }
+
+    .mobile__menu-button {
+        max-height: 70px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    
 }

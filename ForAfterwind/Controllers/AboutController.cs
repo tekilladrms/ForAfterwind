@@ -22,7 +22,7 @@ namespace ForAfterwind.Controllers
 
         public IActionResult Musicians()
         {
-            var musicians = db.Musicians.Include(x => x.SocialLinks).Include(x => x.Skills);
+            var musicians = db.Musicians.Include(x => x.SocialLinks).Include(x => x.Skills).AsNoTracking();
             
             
             return View(musicians);

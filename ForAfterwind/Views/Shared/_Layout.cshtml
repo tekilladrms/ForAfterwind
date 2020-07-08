@@ -28,14 +28,62 @@
                         </a>
                     </div>
                     @* -----------Кнопка для мобильной навигации-------------- *@
-                    <button type="button"
-                            class="navbar-toggle collapsed"
-                            data-toggle="collapse"
-                            data-target="#navbar-main">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                    @*<button type="button"
+                class="mobile__menu-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>*@
+
+                </div>
+                <div class="col-sm-1 mobile__menu">
+                    <img src="~/img/mobileMenuButton.png" class="mobile__menu-button" alt="" />
+                    <ul class="menu d-flex justify-content-center">
+                        <li>
+                            @Html.ActionLink("Home", "Index", "Home")
+                        </li>
+
+                        <li>
+                            <a href="#">About Us</a>
+                            <ul>
+                                <li>
+                                    @Html.ActionLink("Band", "Band", "About")
+                                </li>
+
+                                <li>
+                                    @Html.ActionLink("Musicians", "Musicians", "About")
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+
+                            <a href="#">Media</a>
+                            <ul>
+                                <li>
+                                    @Html.ActionLink("Audio", "Audio", "Media")
+                                </li>
+
+                                <li>
+                                    @Html.ActionLink("Video", "Video", "Media")
+                                </li>
+
+                                <li>
+                                    @Html.ActionLink("Photo", "Photo", "Media")
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            @Html.ActionLink("Merch", "Index", "Merch")
+                        </li>
+
+                        <li>
+                            @Html.ActionLink("Blog", "Index", "Blog")
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-lg-auto offset-lg-1 parent__menu">
                     <ul class="menu d-flex justify-content-center">

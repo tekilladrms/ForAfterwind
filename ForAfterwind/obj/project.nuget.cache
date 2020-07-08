@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "CAbrG1LzEoOBek0iSXFPx5h69IrKZGCO/DJ/mGROSKybdr6BeTPJiOuHZDgVCImDMqA07Hd9vhbVMxTH4SLg8w==",
+  "dgSpecHash": "4Tjd5XfIZR8mxqF57bCfPUYZ3ojJ7tUtc+mHy/P9xp2d45j80qyXuIBpJZbCuRVIXwoqzwoS0DvDM0NuZPT6cQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\tekil\\source\\repos\\ForAfterwind\\ForAfterwind\\ForAfterwind.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tekil\\.nuget\\packages\\de.lkraemer.nemmet\\1.0.2\\de.lkraemer.nemmet.1.0.2.nupkg.sha512",
     "C:\\Users\\tekil\\.nuget\\packages\\de.lkraemer.tagbuilder\\1.0.2\\de.lkraemer.tagbuilder.1.0.2.nupkg.sha512",
+    "C:\\Users\\tekil\\.nuget\\packages\\magick.net-q16-anycpu\\7.20.0.1\\magick.net-q16-anycpu.7.20.0.1.nupkg.sha512",
+    "C:\\Users\\tekil\\.nuget\\packages\\magick.net.core\\3.0.0\\magick.net.core.3.0.0.nupkg.sha512",
     "C:\\Users\\tekil\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\tekil\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\tekil\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

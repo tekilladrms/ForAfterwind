@@ -4,20 +4,52 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
-<h1>Post</h1>
+<div class="">
 
-<div>
-    <div>
-        @* Конвертируем обложку(byte[]) в Base64 для отображения *@
-        @{
-            var base64 = Convert.ToBase64String(Model.Cover);
-            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-        }
-        <img class="img-thumbnail post__preview-img background__darkest" src="@imgSrc" />
-    </div>
 
-    <div>
-        <textarea asp-for="Description">
-        </textarea>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="post__content background__darkest overflow-auto">
+
+                <div>
+                    @* Конвертируем обложку(byte[]) в Base64 для отображения *@
+                    @{
+                        var base64 = Convert.ToBase64String(Model.Cover);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+                    <img class="post__view-img background__darkest" src="@imgSrc" />
+                </div>
+                <h1>@Model.Title</h1>
+
+
+                <p>@Model.PostedOn.Year</p>
+
+                <div id="text" class="post__content-text">
+
+                    @Html.Raw(Model.Description)
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <h2 class="background__dark">Other posts</h2>
+
+            <div class="background__dark other__posts overflow-auto">
+
+
+                @foreach (var el in ViewBag.OtherPosts)
+                {
+                    <a asp-action="Article"
+                       asp-controller="Blog"
+                       asp-route-id="@el.Id">
+                        <h4>@el.Title</h4>
+                    </a>
+                }
+
+            </div>
+        </div>
     </div>
 </div>
+
+

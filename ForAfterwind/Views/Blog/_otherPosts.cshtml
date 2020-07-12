@@ -1,0 +1,10 @@
+﻿@model IEnumerable<ForAfterwind.Domain.Post>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@foreach(var el in Model)
+{
+    <div class="allo">
+        <h3>@el.Title</h3>
+    </div>
+}

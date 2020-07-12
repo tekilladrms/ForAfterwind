@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using ForAfterwind.Domain;
 using ImageMagick;
 using Microsoft.AspNetCore.Hosting;
@@ -296,7 +297,9 @@ namespace ForAfterwind.Controllers
             if(uploadedFile != null)
             {
                 oldPost.CoverMimeType = uploadedFile.ContentType;
-                oldPost.Cover = await ResizeImageAsync(uploadedFile);
+                oldPost.Cover = await FileToByteAsync(uploadedFile);
+                oldPost.CoverThumbnail = await ResizeImageAsync(uploadedFile);
+
             }
 
             db.Posts.Update(oldPost);
@@ -325,7 +328,8 @@ namespace ForAfterwind.Controllers
             if(uploadedFile != null)
             {
                 post.CoverMimeType = uploadedFile.ContentType;
-                post.Cover = await ResizeImageAsync(uploadedFile);
+                post.Cover = await FileToByteAsync(uploadedFile);
+                post.CoverThumbnail = await ResizeImageAsync(uploadedFile);
             }
             
             db.Posts.Add(post);

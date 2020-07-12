@@ -22,6 +22,7 @@ namespace ForAfterwind.Domain
         public DateTime? Modified { get; set; }
         public ICollection<Tag> Tags { get; set; }
         public byte[] Cover { get; set; }
+        public byte[] CoverThumbnail { get; set; }
         public string CoverMimeType { get; set; }
 
         public Post()

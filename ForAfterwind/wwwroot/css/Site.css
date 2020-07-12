@@ -24,7 +24,11 @@ body {
 }
 
 .background__darkest {
-    background-color: rgba(0, 0, 0, 0.80)
+    background-color: rgba(0, 0, 0, 0.87);
+}
+
+.background__light {
+    background-color: rgba(159, 194, 232, 0.88);
 }
 
 h1, h2, h3, h4 {
@@ -486,12 +490,15 @@ h4 {
     width: 100%;
 }
 
+.post__view-img {
+    width: 100%;
+}
+
 
 .post__preview-title {
     position: relative;
-    bottom: 35px;
-    margin-left: 2px;
-    margin-right: 2px;
+    bottom: 33px;
+    
 }
 
     .post__preview-title h3 {
@@ -499,13 +506,24 @@ h4 {
     }
 
 
+.img-thumbnail {
+    padding: 0;
+    border: none;
+}
+.post__content{
+    max-height: 75vh;
+}
+.post__content-text {
+    color: #fff;
+}
 
+.other__posts {
+    max-height: 70vh;
+}
 
-
-
-
-
-
+    .other__posts h2 {
+        text-align: center;
+    }
 /*media queries*/
 @media screen and (min-width: 1351px) {
     .mobile__menu {
@@ -645,6 +663,4 @@ h4 {
         margin-top: 10px;
         margin-bottom: 10px;
     }
-
-    
 }

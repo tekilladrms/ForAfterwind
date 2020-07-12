@@ -11,9 +11,11 @@ namespace ForAfterwind.Controllers
     public class BlogController : Controller
     {
         AppDbContext db;
+        List<Post> allPosts;
         public BlogController(AppDbContext context)
         {
             db = context;
+            allPosts = db.Posts.AsNoTracking().ToList();
         }
         public IActionResult Index()
         {
@@ -23,8 +25,15 @@ namespace ForAfterwind.Controllers
         [HttpGet]
         public async Task<IActionResult> Article(int id)
         {
-            return View(await db.Posts.AsNoTracking().FirstOrDefaultAsync(post => post.Id == id));
+            
+            //ViewBag.OtherPosts = await db.Posts.AsNoTracking().Where(post => post.Id != id).ToListAsync();
+            ViewBag.OtherPosts = allPosts.Where(post => post.Id != id).ToList();
+            return View(allPosts.FirstOrDefault(post => post.Id == id));
+            //return View()
         }
 
+        
+
+        
     }
 }

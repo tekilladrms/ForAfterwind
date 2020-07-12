@@ -7,6 +7,7 @@ $(document).ready(function () {
     $("#photos").submit();
     $("#songs").submit();
     $("#videos").submit();
+    
 
     $('textarea#tiny').tinymce({
         height: 700,

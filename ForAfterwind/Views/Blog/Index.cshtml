@@ -12,11 +12,12 @@
 
                 @* Конвертируем обложку(byte[]) в Base64 для отображения *@
                 @{ 
-                    var base64 = Convert.ToBase64String(el.Cover);
+                    var base64 = Convert.ToBase64String(el.CoverThumbnail);
                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                 }
                 <img class="img-thumbnail post__preview-img background__darkest" src="@imgSrc" />
                 <div class="post__preview-title">
+                    
                     <h3 class=" background__dark">@el.Title</h3>
                 </div>
 

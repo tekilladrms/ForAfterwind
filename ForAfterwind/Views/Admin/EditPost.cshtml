@@ -20,12 +20,15 @@
         <div class="col-lg-3">
             <div class="form-group">
 
-                @* Конвертируем обложку(byte[]) в Base64 для отображения *@
-                @{
-                    var base64 = Convert.ToBase64String(Model.Cover);
-                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                @if (Model.CoverThumbnail != null && Model.CoverThumbnail.Length > 0)
+                {
+                    @* Конвертируем обложку(byte[]) в Base64 для отображения *@
+                    
+                        var base64 = Convert.ToBase64String(Model.CoverThumbnail);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    
+                    <img src="@imgSrc" />
                 }
-                <img src="@imgSrc" />
 
                 <label class="control-label">Выберите обложку</label>
                 <input type="file" name="uploadedFile" accept="image/*" />

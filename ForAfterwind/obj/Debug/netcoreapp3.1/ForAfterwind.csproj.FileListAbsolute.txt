@@ -186,3 +186,4 @@ C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\ru
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\ForAfterwind.csproj.CoreCompileInputs.cache
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\ForAfterwind.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Article.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Blog\_otherPosts.cshtml.g.cs

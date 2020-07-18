@@ -13,23 +13,62 @@
 <body>
 
     <div class="container-fluid">
+        <div class="row background__dark">
+            
+            <div class="col-md-11">
+                <a asp-controller="Admin" asp-action="Index"><h2>Admin panel</h2></a>
+                
+            </div>
+
+            <div class="col logout__link">
+                @if (User.Identity.IsAuthenticated)
+                {
+        <a asp-controller="Auth" asp-action="Logout">Logout</a>}
+            </div>
+            
+        </div>
         <div class="row">
-            <div class="col-md-2 background__dark left-panel">
+            <div class="col-md-2 background__dark left__panel">
                 <ul>
                     <li>
-                        @Html.ActionLink("Musicians", "Musician", "Admin")
+                        <a asp-controller="Admin" asp-action="Musician">
+                            <div class="left__panel-link">
+                                Musicians
+                            </div>
+                        </a>
+                        
                     </li>
                     <li>
-                        @Html.ActionLink("Releases", "Audio", "Admin")
+                        <a asp-controller="Admin" asp-action="Audio">
+                            <div class="left__panel-link">
+                                Releases
+                            </div>
+                        </a>
+                        
                     </li>
                     <li>
-                        @Html.ActionLink("Video", "Video", "Admin")
+                        <a asp-controller="Admin" asp-action="Video">
+                            <div class="left__panel-link">
+                                Video
+                            </div>
+                        </a>
+                        
                     </li>
                     <li>
-                        @Html.ActionLink("Photo", "Photo", "Admin")
+                        <a asp-controller="Admin" asp-action="Photo">
+                            <div class="left__panel-link">
+                                Photo
+                            </div>
+                        </a>
+                        
                     </li>
                     <li>
-                        @Html.ActionLink("Blog", "Blog", "Admin")
+                        <a asp-controller="Admin" asp-action="Blog">
+                            <div class="left__panel-link">
+                                Blog
+                            </div>
+                        </a>
+                        
                     </li>
                 </ul>
             </div>

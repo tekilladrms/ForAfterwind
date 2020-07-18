@@ -1,4 +1,4 @@
-﻿namespace ForAfterwind.Domain
+﻿namespace ForAfterwind.Models
 {
     public enum TypesOfReleases
     {

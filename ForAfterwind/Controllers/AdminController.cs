@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using ForAfterwind.Domain;
+using ForAfterwind.Models;
 using ImageMagick;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace ForAfterwind.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private AppDbContext db;
@@ -26,44 +27,37 @@ namespace ForAfterwind.Controllers
             _appEnvironment = appEnvironment;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Video()
         {
-            var videoAlbums = db.VideoAlbums
-                .Include(x => x.Videos);
-
-            return View(videoAlbums);
+            return View(db.VideoAlbums.AsNoTracking());
         }
 
+        [HttpGet]
         public IActionResult Audio()
         {
-            var releases = db.Releases
-                .Include(x => x.Songs);
-
-            return View(releases);
+            return View(db.Releases.AsNoTracking());
         }
 
+        [HttpGet]
         public IActionResult Photo()
         {
-            var photoAlbums = db.PhotoAlbums
-                .Include(x => x.Photos);
-
-            return View(photoAlbums);
+            return View(db.PhotoAlbums.AsNoTracking());
         }
 
+        [HttpGet]
         public IActionResult Musician()
         {
-            var musicians = db.Musicians
-                .Include(x => x.Skills)
-                .Include(x => x.SocialLinks);
-
-            return View(musicians);
+            return View(db.Musicians.AsNoTracking());
         }
 
+        [HttpGet]
         public IActionResult Blog()
         {
             return View(db.Posts.AsNoTracking());    

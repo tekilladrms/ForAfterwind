@@ -187,3 +187,6 @@ C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Fo
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\ForAfterwind.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Article.cshtml.g.cs
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Blog\_otherPosts.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Auth\Login.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ViewImports.cshtml.g.cs

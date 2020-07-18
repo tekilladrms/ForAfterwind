@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ForAfterwind.Domain;
+using ForAfterwind.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +24,7 @@ namespace ForAfterwind.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Article(int id)
+        public IActionResult Article(int id)
         {
             
             //ViewBag.OtherPosts = await db.Posts.AsNoTracking().Where(post => post.Id != id).ToListAsync();

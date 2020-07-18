@@ -1,8 +1,9 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@{
-    Layout = "_AdminLayout";
-}
-@model IEnumerable<ForAfterwind.Domain.Musician>
+﻿@model IEnumerable<ForAfterwind.Models.Musician>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{ Layout = "_AdminLayout"; }
+
 
 <div class="container">
 
@@ -11,18 +12,16 @@
     <table>
         @foreach (var el in Model)
         {
-            <tr>
+<tr>
 
-                <td>@el.Name</td>
-                <td>
-                    
-                    <a asp-action="EditMusician" asp-controller="Admin" asp-route-id="@el.Id"> Edit </a> |
-                    <a asp-action="DeleteMusician" asp-controller="Admin" method="post" asp-route-id="@el.Id"> Delete </a>
-                </td>
+    <td>@el.Name</td>
+    <td>
 
-            </tr>
+        <a asp-action="EditMusician" asp-controller="Admin" asp-route-id="@el.Id"> Edit </a> |
+        <a asp-action="DeleteMusician" asp-controller="Admin" method="post" asp-route-id="@el.Id"> Delete </a>
+    </td>
 
-        }
+</tr>}
     </table>
     <a asp-action="CreateMusician" asp-controller="Admin"> Add </a>
 </div>

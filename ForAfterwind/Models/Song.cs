@@ -4,19 +4,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ForAfterwind.Domain
+namespace ForAfterwind.Models
 {
-    public class SocialLink
+    public class Song
     {
         [Required]
         public int Id { get; set; }
 
         public string Name { get; set; }
+        public string PathToSong { get; set; }
+        public TypesOfReleases? Type { get; set; }
 
-        public string Path { get; set; }
+        
+        public int? ReleaseId { get; set; }
+        public Release Release { get; set; }
 
-
-        public int? MusicianId { get; set; }
-        public Musician Musician { get; set; }
     }
 }

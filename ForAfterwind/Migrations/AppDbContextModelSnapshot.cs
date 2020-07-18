@@ -19,7 +19,7 @@ namespace ForAfterwind.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ForAfterwind.Domain.Musician", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Musician", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,7 +38,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("Musicians");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Photo", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,7 +58,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.PhotoAlbum", b =>
+            modelBuilder.Entity("ForAfterwind.Models.PhotoAlbum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,7 +79,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("PhotoAlbums");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Post", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,7 +124,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.PostCover", b =>
+            modelBuilder.Entity("ForAfterwind.Models.PostCover", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -145,7 +145,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("PostCovers");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Release", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Release", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -163,7 +163,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("Releases");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Skill", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Skill", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -183,7 +183,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("Skills");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.SocialLink", b =>
+            modelBuilder.Entity("ForAfterwind.Models.SocialLink", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -206,7 +206,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("SocialLinks");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Song", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Song", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -232,7 +232,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Tag", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -258,7 +258,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Video", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Video", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -286,7 +286,7 @@ namespace ForAfterwind.Migrations
                     b.ToTable("Videos");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.VideoAlbum", b =>
+            modelBuilder.Entity("ForAfterwind.Models.VideoAlbum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -503,48 +503,48 @@ namespace ForAfterwind.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Photo", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Photo", b =>
                 {
-                    b.HasOne("ForAfterwind.Domain.PhotoAlbum", "PhotoAlbum")
+                    b.HasOne("ForAfterwind.Models.PhotoAlbum", "PhotoAlbum")
                         .WithMany("Photos")
                         .HasForeignKey("PhotoAlbumId");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Skill", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Skill", b =>
                 {
-                    b.HasOne("ForAfterwind.Domain.Musician", "Musician")
+                    b.HasOne("ForAfterwind.Models.Musician", "Musician")
                         .WithMany("Skills")
                         .HasForeignKey("MusicianId");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.SocialLink", b =>
+            modelBuilder.Entity("ForAfterwind.Models.SocialLink", b =>
                 {
-                    b.HasOne("ForAfterwind.Domain.Musician", "Musician")
+                    b.HasOne("ForAfterwind.Models.Musician", "Musician")
                         .WithMany("SocialLinks")
                         .HasForeignKey("MusicianId");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Song", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Song", b =>
                 {
-                    b.HasOne("ForAfterwind.Domain.Release", "Release")
+                    b.HasOne("ForAfterwind.Models.Release", "Release")
                         .WithMany("Songs")
                         .HasForeignKey("ReleaseId");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Tag", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Tag", b =>
                 {
-                    b.HasOne("ForAfterwind.Domain.Post", null)
+                    b.HasOne("ForAfterwind.Models.Post", null)
                         .WithMany("Tags")
                         .HasForeignKey("PostId");
                 });
 
-            modelBuilder.Entity("ForAfterwind.Domain.Video", b =>
+            modelBuilder.Entity("ForAfterwind.Models.Video", b =>
                 {
-                    b.HasOne("ForAfterwind.Domain.Release", "Release")
+                    b.HasOne("ForAfterwind.Models.Release", "Release")
                         .WithMany()
                         .HasForeignKey("ReleaseId");
 
-                    b.HasOne("ForAfterwind.Domain.VideoAlbum", "VideoAlbum")
+                    b.HasOne("ForAfterwind.Models.VideoAlbum", "VideoAlbum")
                         .WithMany("Videos")
                         .HasForeignKey("VideoAlbumId");
                 });

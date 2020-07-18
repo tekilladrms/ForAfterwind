@@ -2,32 +2,45 @@
     background-color: darkgray;
 }
 
-.background__dark{
+.background__dark {
     background-color: #191616;
 }
 
-h3{
+h3 {
     height: 65px;
-    
 }
 
-.release__cover img, .video-album__cover img, .photo-album__cover img{
+.release__cover img, .video-album__cover img, .photo-album__cover img {
     width: 100%;
-    
 }
+
 .video-album__cover, .photo-album__cover {
     max-height: 30vh;
 }
 
 
-#musicianphoto img{
+#musicianphoto img {
     width: 15vh;
 }
 
-#links{
+#links {
     max-height: 55vh;
 }
 
+a {
+    color: #fff;
+}
+
+/*Left panel*/
+
+.left__panel ul li a {
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.left__panel ul li:hover > a {
+    color: #a40909;
+}
 /*----Scrollbar----*/
 ::-webkit-scrollbar-button {
     margin-top: 20px;
@@ -56,34 +69,41 @@ h3{
     width: 4px;
 }
 
-/*Audio/Release*/
+.logout__link a {
+    text-decoration: none;
+}
 
-.content{
+
+/*Audio/Release*/
+.content {
     max-width: 70%;
 }
-.songs{
+
+.songs {
     max-height: 55vh;
 }
-#audio-player{
+
+#audio-player {
     height: 30px;
 }
 
 
 /*Video*/
 
-.video-row{
+.video-row {
     max-height: 60vh;
 }
 
-.video-player{
+.video-player {
     width: 100%;
 }
 
 /*Photo*/
 
-.photo-container img{
+.photo-container img {
     width: 90%;
 }
+
 .photo {
     max-height: 60vh;
 }

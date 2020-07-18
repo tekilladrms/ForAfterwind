@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
-namespace ForAfterwind.Domain
+namespace ForAfterwind.Models
 {
     public class Post
     {

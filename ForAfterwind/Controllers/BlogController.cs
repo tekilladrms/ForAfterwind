@@ -18,23 +18,36 @@ namespace ForAfterwind.Controllers
             db = context;
             allPosts = db.Posts.AsNoTracking().ToList();
         }
-        public IActionResult Index()
-        {
-            return View(db.Posts.AsNoTracking());
-        }
 
         [HttpGet]
-        public IActionResult Article(int id)
+        [Route("Blog")]
+        [Route("Blog/Index")]
+        public IActionResult Index()
         {
-            
-            //ViewBag.OtherPosts = await db.Posts.AsNoTracking().Where(post => post.Id != id).ToListAsync();
-            ViewBag.OtherPosts = allPosts.Where(post => post.Id != id).ToList();
-            return View(allPosts.FirstOrDefault(post => post.Id == id));
-            //return View()
+            return View(allPosts);
         }
 
-        
 
-        
+
+        [HttpGet]
+        //[Route("Blog/Article/{UrlSlug?}")]
+        public IActionResult Article(string urlSlug)
+        {
+            //ViewBag.OtherPosts = allPosts.Where(post => post.Id != id).ToList();
+            //return View(allPosts.FirstOrDefault(post => post.Id == id));
+
+            if (urlSlug == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.OtherPosts = allPosts.Where(post => post.UrlSlug != urlSlug).ToList();
+            return View(allPosts.FirstOrDefault(post => post.UrlSlug == urlSlug));
+
+        }
+
+
+
+
     }
 }

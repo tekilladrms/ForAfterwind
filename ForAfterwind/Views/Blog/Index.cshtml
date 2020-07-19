@@ -8,7 +8,7 @@
         <div class="col-lg-3 col-sm-4 post__preview">
             <a asp-action="Article"
                asp-controller="Blog"
-               asp-route-id="@el.Id" >
+               asp-route-urlSlug="@el.UrlSlug">
 
                 @* Конвертируем обложку(byte[]) в Base64 для отображения *@
                 @{ 

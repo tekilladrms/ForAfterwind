@@ -39,6 +39,8 @@ namespace ForAfterwind
                 options.LoginPath = "/Auth/Login";
             });
 
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
@@ -57,18 +59,21 @@ namespace ForAfterwind
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            
+
             app.UseMvc(routes =>
             {
-                //routes.MapRoute(
-                //    name: "blog",
-                //    template: "{controller=Blog}/{action=Article}/{UrlSlug?}");
+                routes.MapRoute(
+                    name: "blog",
+                    template: "{controller=Blog}/{action=Article}/{UrlSlug?}");
 
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
             });
-            //app.UseMvcWithDefaultRoute();
+            
 
         }
     }

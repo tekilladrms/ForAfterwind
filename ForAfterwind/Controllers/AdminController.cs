@@ -286,7 +286,7 @@ namespace ForAfterwind.Controllers
             oldPost.Modified = DateTime.Now;
             oldPost.Meta = newPost.Meta;
             oldPost.Tags = newPost.Tags;
-            oldPost.UrlSlug = GetUrlSlug(newPost.Title);
+            oldPost.UrlSlug = GetUrlSlug(newPost.Title, newPost.Id);
 
             if(uploadedFile != null)
             {
@@ -317,7 +317,7 @@ namespace ForAfterwind.Controllers
         {
             post.PostedOn = DateTime.Now;
             post.Modified = DateTime.Now;
-            post.UrlSlug = GetUrlSlug(post.Title);
+            post.UrlSlug = GetUrlSlug(post.Title, post.Id);
 
             if(uploadedFile != null)
             {
@@ -799,9 +799,12 @@ namespace ForAfterwind.Controllers
             return null;
         }
 
-        protected string GetUrlSlug(string postTitle)
+        protected string GetUrlSlug(string postTitle, int postId)
         {
-            return String.Join("_", postTitle.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+            string result = postId.ToString() + "_";
+            result += String.Join("_", postTitle.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+
+            return result;
         }
 
     }

@@ -1,38 +1,45 @@
 ﻿@model IEnumerable<ForAfterwind.Models.VideoAlbum>
 
+@{
+    ViewData["Title"] = "Video";
+}
+
 
 <div class="container">
-    
-    <div id="unhiddenInfo" class="row background__dark">
-        
+    <div id="unhiddenInfo" class="row background__dark unhiddenVideo">
+
     </div>
-    <div id="hiddenInfo" class="row background__dark">
+    
+    <div id="hiddenInfo" class="row background__dark overflow-auto hiddenVideo">
         @foreach (var el in Model)
         {
-        <div class="row video-album">
-            <div class="col-md align-self-center" onclick="showAlbum(this)">
-                <p>@el.Name</p>
+        <div class="video-album col-md-3 col-sm-6">
+            <div onclick="showAlbum(this)">
+                <h3>@el.Name</h3>
+                <button class="close">Close</button>
                 <img class="video-album_cover" src="@Url.Content(el.PathToCover)" alt="@Url.Content(el.Name)" />
 
             </div>
-            <div class="info hidden col-md-11">
-                <div class="row overflow-auto video-row justify-content-around background__dark">
+            <div class="info hidden col-md">
+                <div class="row overflow-auto video-row justify-content-around">
                     @foreach (var item in el.Videos)
                     {
                         <div class="col-md-5">
-                            <div class="video-container">
+                            <div class="video-container background__dark">
                                 <p>@item.Name</p>
                                 <video class="video-player" src="@Url.Content(item.PathToVideo)" controls="controls" controlsList="nodownload"></video>
                             </div>
                         </div>
-                    }
+                     }
                 </div>
-                
+
             </div>
         </div>
 
         }
 
     </div>
+
+    
 </div>
 

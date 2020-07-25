@@ -1,5 +1,39 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-    <p>Media is coming soon</p>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{ ViewData["Title"] = "Media"; }
+
+<div class="row media__links no-gutters">
+    <div class="col media__part background__dark">
+        <a asp-controller="Media" asp-action="Audio">
+            <div class="media__wrapper">
+                <img id="media__slide" class="media__part-background" src="~/img/Backgrounds/About_1.jpg" alt="" />
+            </div>
+            <div class="title__content">
+                <h2 class="media__part-title">Audio</h2>
+                <i class="media__part-icon fa fa-play-circle"></i>
+            </div>
+        </a>
+    </div>
+    <div class="col media__part background__dark">
+        <a asp-controller="Media" asp-action="Video">
+            <div class="media__wrapper">
+                <img class="media__part-background" src="~/img/Backgrounds/About_9.jpg" alt="" />
+            </div>
+            <div class="title__content">
+                <h2 class="media__part-title">Video</h2>
+                <i class="media__part-icon fa fa-video-camera"></i>
+            </div>
+        </a>
+    </div>
+    <div class="col media__part background__dark">
+        <a asp-controller="Media" asp-action="Photo">
+            <div class="media__wrapper">
+                <img class="media__part-background" src="~/img/Backgrounds/About_10.jpg" alt="" />
+            </div>
+            <div class="title__content">
+                <h2 class="media__part-title">Photo</h2>
+                <i class="media__part-icon fa fa-camera"></i>
+            </div>
+        </a>
+    </div>
+</div>

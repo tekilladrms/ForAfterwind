@@ -64,20 +64,20 @@ h1, h2, h3, h4 {
 
 ::-webkit-scrollbar {
     width: 4px;
+    height: 4px;
 }
 
 /*------------------- Menu -------------------*/
 
 .logo {
     margin-top: 10px;
-    width: 30vh;
 }
 
     .logo a img {
-        width: 25vh;
+        width: 100%;
     }
 
-.menu li ul {
+.menu li ul, .mobile__menu li ul {
     position: absolute;
     min-width: 150px;
     display: none;
@@ -98,6 +98,21 @@ h1, h2, h3, h4 {
         margin-left: -30px;
     }
 
+.mobile__menu {
+    display: block;
+}
+
+    .mobile__menu li {
+        list-style: none;
+        padding-left: 30px;
+        margin-top: 30px;
+        padding-bottom: 0;
+        z-index: 9999;
+        text-align: center;
+    }
+
+
+
 .menu li {
     list-style: none;
     padding-left: 30px;
@@ -106,7 +121,7 @@ h1, h2, h3, h4 {
     z-index: 9999;
 }
 
-    .menu li a, .links__item a {
+    .menu li a, .links__item a, .mobile__menu li a {
         text-decoration: none;
         text-align: center;
         font-size: 18px;
@@ -120,12 +135,31 @@ h1, h2, h3, h4 {
             background-color: none;
         }
 
-    .menu li:hover > ul {
+    .menu li:hover > ul, .mobile__menu li:hover > ul {
         display: flex;
         padding-bottom: 10px;
         padding-left: 0;
         padding-top: 0;
     }
+
+/*menu*/
+.mobile__menu {
+    display: none;
+}
+
+.mobile__menu-button {
+    display: none;
+}
+/*left bar*/
+.left {
+    top: 30%;
+    left: 0;
+}
+
+    .left ul {
+        display: block;
+    }
+
 
 .links__item img {
     width: 30px;
@@ -235,14 +269,12 @@ h1, h2, h3, h4 {
 
 
 .scale {
-    /*display: inline-block;*/ /* Строчно-блочный элемент */
     overflow: hidden; /* Скрываем всё за контуром */
     padding: 0;
 }
 
     .scale img {
         transition: 0.5s; /* Время эффекта */
-        /*display: block;*/ /* Убираем небольшой отступ снизу */
     }
 
         .scale img:hover {
@@ -257,17 +289,17 @@ h1, h2, h3, h4 {
 }
 
 .active {
-    z-index: 9999;
+    /*    z-index: 9999;*/
 }
 
 .info {
-    padding-top: 3%;
+    padding-top: 2%;
     padding-left: 3%;
     color: #fff;
 }
 
     .info ul li {
-        font-size: 18px;
+        font-size: 20px;
     }
 
 .musician__links {
@@ -289,14 +321,92 @@ h1, h2, h3, h4 {
 
             .musician__links li a:hover {
                 text-decoration: none;
-                color: #fff;
+                color: #a40909;
             }
 
 
 
 
 /*------------- MEDIA --------------*/
+
+
+.media__part {
+    margin-left: 1%;
+    margin-right: 1%;
+    overflow: hidden;
+    max-height: 80vh;
+}
+
+    .media__part i {
+        font-size: 6rem;
+        color: #fff;
+    }
+
+    .media__part .title__content {
+        justify-content: center;
+        position: absolute;
+        top: 40%;
+        left: 35%;
+    }
+
+    .media__part:hover {
+        cursor: pointer;
+    }
+
+.media__wrapper {
+    height: 100%;
+}
+
+.media__part-background:hover {
+    transform: translate(-1900px, 0);
+}
+
+.media__part a:hover > .title__content i {
+    color: #a40909;
+}
+
+.media__part-background {
+    height: 100%;
+    transition: 5s;
+}
+
+.media__part-title {
+    font-family: Main_font;
+    text-transform: uppercase;
+    font-size: 20px;
+    text-align: center;
+}
 /*----Audio----*/
+.unhiddenAudio {
+    max-height: 50vh;
+    margin-bottom: 10px;
+}
+
+    .unhiddenAudio .album {
+        padding-left: 20px;
+    }
+
+    .unhiddenAudio .album {
+        max-height: 45vh;
+    }
+
+        .unhiddenAudio .album .album__cover {
+            height: 40vh;
+            width: 40vh;
+        }
+
+
+.hiddenAudio {
+    display: flex;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+    .hiddenAudio .album {
+        max-width: 30vh;
+    }
+
+
 audio {
     width: 45vh;
     height: 30px;
@@ -311,8 +421,9 @@ audio {
 
     .audio-player p {
         margin-right: 30px;
-        width: 70px;
+        width: 15vh;
         margin-top: 16px;
+        font-size: 18px;
     }
 
 .audio-container {
@@ -321,45 +432,90 @@ audio {
 
 .album {
     overflow: hidden;
+    max-height: 30vh;
 }
 
 .album__cover {
     margin-bottom: 3%;
     margin-top: 3%;
-}
-
-#unhiddenInfo {
-    /*max-height: 50vh;*/
-    margin-bottom: 20px;
-}
-
-    #unhiddenInfo > div {
-        padding-left: 20px;
-    }
-
-    /*#unhiddenInfo div .album__cover {
-        max-height: 40vh;
-        max-width: 40vh;
-    }*/
-
-    #unhiddenInfo div div h2 {
-        padding-bottom: 3%;
-        text-align: center;
-    }
-
-
-
-#hiddenInfo div img:hover {
-    cursor: pointer;
+    width: 100%;
 }
 
 
+
+/*close button*/
+
+#hiddenInfo div div button {
+    display: none;
+}
+
+#unhiddenInfo div div button {
+    display: flex;
+    position: relative;
+    top: -40px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 30px;
+}
 
 
 /*----Video----*/
-.video-album .photo-album {
-    height: 40vh;
+
+.unhiddenVideo div .info {
+    padding-top: 0;
+    padding-left: 0;
 }
+
+.unhiddenVideo div div {
+    padding-bottom: 0;
+    margin-bottom: 10px;
+}
+
+    .unhiddenVideo div div:hover {
+        cursor: pointer;
+    }
+
+    .unhiddenVideo div div .video-album_cover {
+        display: none;
+    }
+
+    .unhiddenVideo div div h3 {
+        text-align: center;
+        font-size: 40px;
+    }
+
+.unhiddenVideo .video-album {
+    height: 60vh;
+}
+
+    .unhiddenVideo .video-album .info {
+        height: 95%
+    }
+
+        .unhiddenVideo .video-album .info .video-row {
+            height: 90%;
+        }
+
+.video-album_cover {
+    width: 100%;
+}
+
+
+.hiddenVideo {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: 10px;
+}
+
+
+
+    .hiddenVideo div div h3 {
+        text-align: center;
+    }
+
+    .hiddenVideo .video-album:hover {
+        cursor: pointer;
+    }
 
 
 
@@ -395,44 +551,56 @@ audio {
 }
 
 .video-row {
-    max-height: 41vh;
+    max-height: 50vh;
 }
 
+/*.video-row div {
+        max-height: 31vh;
+    }*/
 /*--------Photo-----------*/
-#unhiddenInfo > .row {
-    margin-right: 0;
+.hiddenPhoto > div > div > h3 {
+    font-size: 20px;
+    text-align: center;
 }
 
-/*#unhiddenInfo > div > div {
-    height: 50vh;
-}*/
+.hiddenPhoto > div > div > img {
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+}
 
-#unhiddenInfo > div > div > img {
+.hiddenPhoto {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: 10px;
+}
+
+    .hiddenPhoto .photo-album {
+        height: 20vh;
+    }
+
+.unhiddenPhoto > div > div > img {
     display: none;
 }
 
-#unhiddenInfo > div > div {
+.unhiddenPhoto > div > .info {
+    padding-top: 0;
 }
 
-    #unhiddenInfo > div > div > p {
-        transform: rotate(270deg);
-        position: absolute;
-        bottom: 55%;
-    }
-
-    #hiddenInfo > div > div > p, #unhiddenInfo > div > div > p {
-        font-size: 20px;
-        color: #fff;
-        text-align: center;
-    }
-
-#hiddenInfo > div {
-    padding-left: 15px;
-    padding-bottom: 15px;
+.unhiddenPhoto > div > div > h3 {
+    font-size: 30px;
 }
 
-#hiddenInfo {
-    display: flex;
+.photo-album_cover {
+    width: 100%;
+}
+
+.photo-album {
+    max-height: 55vh;
+}
+
+.photos {
+    height: 100%;
 }
 
 .mini-photo {
@@ -460,16 +628,16 @@ h4 {
 }
 
 .photo-album_cover {
-    width: 30vh;
+    width: 100%;
 }
 
     .photo-album_cover:hover {
         cursor: pointer;
     }
 
-#unhiddenInfo > div > div > p:hover {
+/*#unhiddenInfo > div > div > p:hover {
     cursor: pointer;
-}
+}*/
 
 /*BLOG*/
 
@@ -498,7 +666,6 @@ h4 {
 .post__preview-title {
     position: relative;
     bottom: 33px;
-    
 }
 
     .post__preview-title h3 {
@@ -510,9 +677,11 @@ h4 {
     padding: 0;
     border: none;
 }
-.post__content{
+
+.post__content {
     max-height: 75vh;
 }
+
 .post__content-text {
     color: #fff;
 }
@@ -525,51 +694,110 @@ h4 {
         text-align: center;
     }
 /*media queries*/
-@media screen and (min-width: 1351px) {
-    .mobile__menu {
-        display: none;
+/*@media screen and (min-width: 1351px) {*/
+
+@media screen and (max-width: 1600px), (max-width: 900px) {
+
+    /*photo*/
+    .hiddenPhoto > div > div > img {
+        width: 80%;
+        left: 10%;
+    }
+}
+
+@media screen and (max-width: 1400px), (max-width: 1050px) {
+
+    /*audio*/
+    .unhiddenAudio .album .album__cover {
+        height: 30vh;
+        width: 30vh;
+    }
+}
+
+@media screen and (max-width: 1366px), (max-width: 768px) {
+
+    /*audio*/
+    .unhiddenAudio .album .album__cover {
+        height: 35vh;
+        width: 35vh;
     }
 
-    .left {
-        top: 30%;
-        left: 0;
-    }
-
-        .left ul {
-            display: block;
-        }
-
-    #unhiddenInfo div .album__cover {
-        max-height: 40vh;
-    }
-
-    #hiddenInfo div img {
+    .unhiddenAudio .album .info {
         width: 100%;
     }
-    /*.photo-album{
-        max-width: 25vh;
-    }*/
-    .photos {
-        max-height: 60vh;
+
+    .audio-player p {
+        width: 20vh;
     }
 
-    /*.blog__container {
-        max-height: 65vh;
-    }*/
+    .hiddenAudio .album {
+        max-width: 25vh;
+    }
+
+    /*video*/
+    .unhiddenVideo .video-album {
+        height: 55vh;
+    }
+
+    /*photo*/
+    .hiddenPhoto > div > div > img {
+        width: 65%;
+        left: 18%;
+    }
+
+    /*blog*/
+    .post__preview-img {
+        height: 17vh;
+    }
+}
+
+@media screen and (max-width: 1360px), (max-height: 1024px) {
+
+    /*audio*/
+    .unhiddenAudio .album .album__cover {
+        width: 30vh;
+        height: 30vh;
+    }
+    /*photo*/
+    .hiddenPhoto > div > div > img {
+        width: 90%;
+        left: 5%;
+    }
+    /*blog*/
+    .post__preview-img {
+        height: 13vh;
+    }
+}
+
+@media screen and (max-width: 1360px), (max-height: 768px) {
+    /*photo*/
+    .hiddenPhoto > div > div > img {
+        width: 65%;
+        left: 18%;
+    }
+    /*blog*/
+    .post__preview-img {
+        height: 17vh;
+    }
 }
 
 @media screen and (max-width: 1350px) {
     body {
         overflow: auto;
     }
-
+    /*menu*/
     .mobile__menu {
         display: none;
     }
 
+    .mobile__menu-button {
+        display: none;
+    }
+    /*left bar*/
     .left {
         bottom: 0;
         left: 35%;
+        top: auto;
     }
 
         .left ul {
@@ -585,12 +813,10 @@ h4 {
         margin-bottom: 35px;
     }
 
-    #unhiddenInfo div .album__cover {
-        max-height: 30vh;
-    }
-
-    #hiddenInfo div .album__cover {
-        width: 70%;
+    /*audio*/
+    .unhiddenAudio .album .album__cover {
+        height: 30vh;
+        width: 30vh;
     }
 
     .info-audio__content {
@@ -601,23 +827,228 @@ h4 {
         .info-audio__content h2 {
             font-size: 1.5rem;
         }
-    /*.photo-album {
-        width: 40vh;
-    }*/
+
+    /*photo*/
     .photos {
         max-height: 45vh;
     }
 
-    .photo-album_cover {
-        width: 30vh;
-    }
-
+    /*video*/
     .video-row {
         height: 33vh;
     }
 
+    /*blog*/
     .blog__container {
         max-height: 65vh;
+    }
+}
+
+@media screen and (max-width: 1280px), (max-height: 1024px) {
+    /*audio*/
+    .info-audio__content {
+        width: 85%;
+    }
+    /*photo*/
+    .hiddenPhoto > div > div > img {
+        width: 90%;
+        left: 5%;
+    }
+    /*blog*/
+    .post__preview-img {
+        height: 13vh;
+    }
+}
+
+@media screen and (max-width: 1280px), (max-height: 960px) {
+    /*blog*/
+    .post__preview-img {
+        height: 15vh;
+    }
+}
+
+@media screen and (max-width: 1280px), (max-height: 800px) {
+    .hiddenPhoto > div > div > img {
+        /*photo*/
+        width: 70%;
+        left: 15%;
+    }
+}
+
+@media screen and (max-width: 1280px), (max-height: 768px) {
+
+    /*video*/
+    .hiddenVideo .video-album {
+        max-width: 20%;
+    }
+}
+
+@media screen and (max-width: 1280px), (max-height: 720px) {
+    /*video*/
+    .unhiddenVideo .video-album {
+        height: 53vh;
+    }
+
+    /*photo*/
+    .hiddenPhoto > div > div > img {
+        width: 64%;
+        left: 18%;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+
+    /*audio*/
+    .unhiddenAudio .album .info {
+        padding-left: 0;
+    }
+
+    .audio-player p {
+        margin-right: 30px;
+        width: 8vh;
+    }
+}
+
+@media screen and (max-width: 1152px), (max-height: 864px) {
+
+    /*video*/
+    .hiddenVideo .video-album {
+        max-width: 25%;
+    }
+
+    /*photo*/
+    .hiddenPhoto > div > div > img {
+        width: 90%;
+        left: 5%;
+    }
+}
+
+@media screen and (max-width: 1152px), (max-height: 648px) {
+    /*video*/
+    .unhiddenVideo .video-album .info {
+        height: 90%;
+    }
+
+    .video-album img {
+        max-width: 27vh;
+    }
+    /*photo*/
+
+    .hiddenPhoto > div > div > img {
+        width: 66%;
+        left: 17%;
+    }
+
+    /*blog*/
+    .post__content {
+        max-height: 70vh;
+    }
+
+    .other__posts {
+        max-height: 63vh;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    /*audio*/
+
+    .unhiddenAudio .album .album__cover {
+        margin-top: 5%;
+    }
+
+    .audio-player {
+        width: 100%;
+    }
+
+        .audio-player p {
+            width: 25vh;
+        }
+
+    .info-audio__content h2 {
+        text-align: center;
+    }
+
+    audio {
+        width: 40vh;
+    }
+
+
+    /*video*/
+    .unhiddenVideo .video-album {
+        height: 50vh;
+    }
+}
+
+@media screen and (max-width: 991px) {
+
+    .logo {
+        width: 15vh;
+        padding-top: 8px;
+    }
+
+    /*menu*/
+    .parent__menu {
+        width: auto;
+    }
+
+    .menu li a {
+        font-size: 15px;
+    }
+
+    .mobile__menu-button {
+        display: none;
+    }
+
+    /*photo*/
+    .musician-photo {
+        max-height: 70vh;
+    }
+
+    .minimize-photo {
+        max-height: 15vh;
+    }
+
+    .hiddenPhoto .photo-album {
+        width: 15%;
+    }
+    /*audio*/
+    audio {
+        width: 55vh;
+    }
+
+    .audio-player {
+        display: block;
+    }
+
+        .audio-player p {
+            width: auto;
+        }
+
+    .audio-container {
+        width: 70vh;
+    }
+
+    .unhiddenAudio .album .album__cover {
+        height: 25vh;
+        width: 25vh;
+    }
+}
+
+@media screen and (max-width: 800px), (max-height: 600px) {
+
+    /*video*/
+    .hiddenVideo div div h3 {
+        font-size: 1rem;
+    }
+
+    .video-album p {
+        font-size: 15px;
+    }
+
+    /*photo*/
+    .hiddenPhoto > div > div > h3 {
+        font-size: 15px;
     }
 }
 
@@ -628,30 +1059,30 @@ h4 {
     }
 
     .left {
-        left: 30%;
+        left: 24%;
     }
 
+    .logo {
+        width: 20vh;
+    }
     /*menu*/
 
     .parent__menu {
         display: none;
     }
 
-    .burger__menu {
-        display: flex;
-    }
-
-    .logo {
-    }
-
-
     .mobile__menu {
+        display: none;
+    }
+
+    .mobile__menu-button {
         display: flex;
     }
 
-        .mobile__menu:hover {
-            cursor: pointer;
-        }
+
+    .mobile__menu:hover {
+        cursor: pointer;
+    }
 
     .mobile__menu-toggle {
         max-width: 70px;
@@ -660,7 +1091,73 @@ h4 {
 
     .mobile__menu-button {
         max-height: 70px;
+        max-width: 70px;
         margin-top: 10px;
         margin-bottom: 10px;
+    }
+
+        .mobile__menu-button img {
+            width: 100%;
+        }
+
+    /*audio*/
+    .unhiddenAudio {
+        max-height: 60vh;
+    }
+
+        .unhiddenAudio .album {
+            max-height: none;
+        }
+
+            .unhiddenAudio .album .album__cover {
+                height: 20vh;
+                width: 20vh;
+            }
+
+    .hiddenAudio .album {
+        max-width: 15vh;
+    }
+
+    .info-audio__content {
+        left: 4%;
+    }
+
+    .audio-container {
+        height: 40vh;
+    }
+
+    /*video*/
+    .unhiddenVideo div div {
+        padding-left: 3%;
+    }
+
+    .unhiddenVideo .video-album {
+        max-height: 58vh;
+    }
+}
+
+@media screen and (max-width: 768px) and (max-height: 1366px) {
+    .video-album {
+        max-height: 58vh;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .media__part {
+        max-height: 75vh;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .media__part {
+        max-height: 70vh;
+    }
+
+        .media__part i {
+            font-size: 4rem;
+        }
+
+    .media__part-title {
+        font-size: 16px;
     }
 }

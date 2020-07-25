@@ -1,23 +1,27 @@
 ﻿@model IEnumerable<ForAfterwind.Models.PhotoAlbum>
 
-    <div class="container">
-        @*<div class="background__darkest">
-            <h4>Progressive carnage</h4>
-        </div>*@
+@{
+    ViewData["Title"] = "Photo";
+}
 
-        <div id="unhiddenInfo" class="background__dark">
+    <div class="container">
+        
+        <div id="unhiddenInfo" class="row background__dark unhiddenPhoto">
 
         </div>
-        <div id="hiddenInfo" class="background__dark">
+
+        <div id="hiddenInfo" class="row background__dark overflow-auto hiddenPhoto">
 
             @foreach (var el in Model)
             {
-            <div class="row photo-album">
-                <div class="col-md" onclick="showAlbum(this)">
-                    <p>@el.Name</p>
+            <div class="photo-album col-md-3 col-sm-6">
+                <div onclick="showAlbum(this)">
+                    <h3>@el.Name</h3>
+                    <button class="close">Close</button>
                     <img class="photo-album_cover" src="@Url.Content(el.PathToCover)" alt="" />
+
                 </div>
-                <div class="info hidden photos col-md-11">
+                <div class="info hidden photos col-md">
                     <div id="grid" class="row overflow-auto no-gutters background__dark">
                         @foreach (var item in el.Photos)
                         {
@@ -34,6 +38,7 @@
             }
 
         </div>
+        
 
         
 

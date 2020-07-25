@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<ForAfterwind.Models.Post>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+@{
+    ViewData["Title"] = "Blog";
+}
+
 <div class="row blog__container background__dark overflow-auto">
 
     @foreach (var el in Model)

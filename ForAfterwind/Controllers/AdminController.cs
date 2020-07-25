@@ -188,13 +188,20 @@ namespace ForAfterwind.Controllers
         {
             if (uploadedFile != null)
             {
-                string path = $"/Media/Albums/{release.Name}/{uploadedFile.FileName}";
-                using (var fileStream = new FileStream(
-                    _appEnvironment.WebRootPath + path, FileMode.Create))
+                string path = $"/Media/Albums/";
+                string subPath = $"{release.Name}/";
+
+                if(!Directory.Exists(path + subPath))
                 {
+                    CreateDirectory(path, subPath);
+                }
+
+                using (var fileStream = new FileStream(
+                    _appEnvironment.WebRootPath + path + subPath + uploadedFile.FileName, FileMode.Create))
+                    {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
-                release.PathToCover = path;
+                release.PathToCover = path + subPath + uploadedFile.FileName;
             }
             db.Releases.Update(release);
             await db.SaveChangesAsync();

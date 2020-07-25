@@ -65,6 +65,25 @@ $(document).ready(function () {
             }
         });
     });
+
+    //Горизонтальная прокрутка
+    (function () {
+        function scrollHorizontally(e) {
+            e = window.event || e;
+            var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+            document.getElementById('hiddenInfo').scrollLeft -= (delta * 60); // Multiplied by 40
+            e.preventDefault();
+        }
+        if (document.getElementById('hiddenInfo').addEventListener) {
+            // IE9, Chrome, Safari, Opera
+            document.getElementById('hiddenInfo').addEventListener("mousewheel", scrollHorizontally, false);
+            // Firefox
+            document.getElementById('hiddenInfo').addEventListener("DOMMouseScroll", scrollHorizontally, false);
+        } else {
+            // IE 6/7/8
+            document.getElementById('hiddenInfo').attachEvent("onmousewheel", scrollHorizontally);
+        }
+    })();
 }
 );
 
@@ -166,22 +185,29 @@ function displayInfo(collection) {
 function showAlbum(e) {
 
     let collection;
+    let oldClassCollection;
+    let newClassCollection;
     let oldClass;
     let newClass;
 
     if (e.parentNode.classList.contains("video-album")) {
         collection = videoAlbums;
-        
+        oldClassCollection = ["col-md-3", "col-sm-6"];
+        newClassCollection = ["col-md", "col-sm"];
     }
     else if (e.parentNode.classList.contains("photo-album")) {
         collection = photoAlbums;
+        oldClassCollection = ["col-md-3", "col-sm-6"];
+        newClassCollection = ["col-md", "col-sm"];
     }
     else {
         collection = albums;
-        oldClass = "col-md-3";
-        newClass = "col-md";
+        
+        oldClassCollection = ["col-md-3", "col-sm-6"];
+        newClassCollection = ["col-md", "col-sm"];
     }
 
+    // проверка на то, содержит ли еще какой-нибудь элемент класс active
     for (var i = 0; i < collection.length; i++) {
         if (collection[i] == e.parentNode) {
             continue;
@@ -190,42 +216,52 @@ function showAlbum(e) {
         
     }
 
+    // первое нажатие
     if (!e.parentNode.classList.contains("active")) {
         e.parentNode.classList.add("active");
-        switchClass(e.parentNode, oldClass, newClass);
+        switchClass(e.parentNode, oldClassCollection, newClassCollection);
+
+        $('#hiddenInfo').removeClass("row");
         
         $('#unhiddenInfo').prepend(e.parentNode);
         displayInfo(infoElements);
     }
+    // повторное нажатие
     else {
         e.parentNode.classList.remove("active");
         $("#hiddenInfo").append(e.parentNode);
+        $('#hiddenInfo').addClass("row");
         displayInfo(infoElements);
     }
 
-    move(collection, oldClass, newClass);
+    move(collection, oldClassCollection, newClassCollection);
 }
 
 
 
-function move(collection, oldClass, newClass) {
+function move(collection, oldClassCollection, newClassCollection) {
 
     for (var i = 0; i < collection.length; i++) {
         if (collection[i].classList.contains("active")) {
-            switchClass(collection[i], oldClass, newClass);
+            switchClass(collection[i], oldClassCollection, newClassCollection);
             $('#unhiddenInfo').prepend(collection[i]);
+            
             displayInfo(infoElements);
         }
         else {
             $("#hiddenInfo").append(collection[i]);
-            switchClass(collection[i], newClass, oldClass);
+            switchClass(collection[i], newClassCollection, oldClassCollection);
+            
         }
     }
 }
 
-function switchClass(element, oldClass, newClass) {
-    element.classList.remove(oldClass);
-    element.classList.add(newClass);
+function switchClass(element, oldClassCollection, newClassCollection) {
+    for (var i = 0; i < oldClassCollection.length; i++) {
+        element.classList.remove(oldClassCollection[i])
+        element.classList.add(newClassCollection[i]);
+    }
+    
 }
 
 

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/libs/owlcarousel2/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="~/libs/owlcarousel2/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="~/libs/fancybox/jquery.fancybox.css" />
+    @*<link rel="stylesheet" href="~/libs/animatecss/animate.min.css" />*@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     <link rel="stylesheet" href="~/fonts/Main_font.ttf" />
@@ -21,7 +22,7 @@
     <div class="background__dark">
         <div class="container wrapper">
             <div class="row">
-                <div class="d-flex col-lg-2 col-sm offset-lg-1 justify-content-sm-center">
+                <div class="d-flex col-lg-3 col-sm-2">
                     <div class="logo">
                         <a href="#">
                             <img src="~/img/Logo_word.png" />
@@ -38,8 +39,12 @@
                         </button>*@
 
                 </div>
-                <div class="col-sm-1 mobile__menu">
-                    <img src="~/img/mobileMenuButton.png" class="mobile__menu-button" alt="" />
+                <div class="mobile__menu-button mobile__menu-toggle collapsed">
+                    <img src="~/img/mobileMenuButton.png" alt="" />
+
+                </div>
+
+                <div class="col-lg parent__menu">
                     <ul class="menu d-flex justify-content-center">
                         <li>
                             @Html.ActionLink("Home", "Index", "Home")
@@ -60,7 +65,7 @@
 
                         <li>
 
-                            <a href="#">Media</a>
+                            @Html.ActionLink("Media", "Index", "Media")
                             <ul>
                                 <li>
                                     @Html.ActionLink("Audio", "Audio", "Media")
@@ -76,61 +81,62 @@
                             </ul>
                         </li>
 
-                        <li>
+                        @*<li>
                             @Html.ActionLink("Merch", "Index", "Merch")
-                        </li>
+                        </li>*@
 
                         <li>
                             @Html.ActionLink("Blog", "Index", "Blog")
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-auto offset-lg-1 parent__menu">
-                    <ul class="menu d-flex justify-content-center">
-                        <li>
-                            @Html.ActionLink("Home", "Index", "Home")
-                        </li>
 
-                        <li>
-                            <a href="#">About Us</a>
-                            <ul>
-                                <li>
-                                    @Html.ActionLink("Band", "Band", "About")
-                                </li>
+            </div>
+            <div id="mobileMenu">
+                <ul class="mobile__menu">
+                    <li>
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
 
-                                <li>
-                                    @Html.ActionLink("Musicians", "Musicians", "About")
-                                </li>
-                            </ul>
-                        </li>
+                    <li>
+                        <a href="#">About Us</a>
+                        <ul>
+                            <li>
+                                @Html.ActionLink("Band", "Band", "About")
+                            </li>
 
-                        <li>
+                            <li>
+                                @Html.ActionLink("Musicians", "Musicians", "About")
+                            </li>
+                        </ul>
+                    </li>
 
-                            <a href="#">Media</a>
-                            <ul>
-                                <li>
-                                    @Html.ActionLink("Audio", "Audio", "Media")
-                                </li>
+                    <li>
 
-                                <li>
-                                    @Html.ActionLink("Video", "Video", "Media")
-                                </li>
+                        <a href="#">Media</a>
+                        <ul>
+                            <li>
+                                @Html.ActionLink("Audio", "Audio", "Media")
+                            </li>
 
-                                <li>
-                                    @Html.ActionLink("Photo", "Photo", "Media")
-                                </li>
-                            </ul>
-                        </li>
+                            <li>
+                                @Html.ActionLink("Video", "Video", "Media")
+                            </li>
 
-                        <li>
-                            @Html.ActionLink("Merch", "Index", "Merch")
-                        </li>
+                            <li>
+                                @Html.ActionLink("Photo", "Photo", "Media")
+                            </li>
+                        </ul>
+                    </li>
 
-                        <li>
-                            @Html.ActionLink("Blog", "Index", "Blog")
-                        </li>
-                    </ul>
-                </div>
+                    <li>
+                        @Html.ActionLink("Merch", "Index", "Merch")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Blog", "Index", "Blog")
+                    </li>
+                </ul>
 
             </div>
         </div>

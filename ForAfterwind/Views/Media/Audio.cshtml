@@ -1,11 +1,14 @@
 ﻿@model IEnumerable<ForAfterwind.Models.Release>
 
+@{
+    ViewData["Title"] = "Audio";
+}
 
 <div class="container">
-    <div id="unhiddenInfo" class="row overflow-auto background__dark">
+    <div id="unhiddenInfo" class="row overflow-auto background__dark unhiddenAudio">
 
     </div>
-    <div id="hiddenInfo" class="row background__dark">
+    <div id="hiddenInfo" class="row background__dark overflow-auto hiddenAudio">
 
         @foreach (var el in Model)
         {
@@ -45,6 +48,43 @@
             </div>
         }
 
-
     </div>
 </div>
+
+@*<div id="hiddenInfo">
+    @foreach (var el in Model)
+    {
+@if (el.Name == "")
+{
+    continue;
+}
+                <div class="d-flex album scale">
+                    <img class="album__cover"
+                         src="@Url.Content(el.PathToCover)"
+                         alt="@el.Name" onclick="showAlbum(this)" />
+                    <div class="info hidden">
+                        <div class="info-audio__content">
+                            <h2>@el.Name</h2>
+                            <div class="audio-container overflow-auto">
+                                @foreach (var item in el.Songs)
+                                {
+                @if (item.Type.Value.ToString() == "Video")
+                {
+                    continue;
+                }
+                                    <div class="audio-player">
+                                        <p>@item.Name</p>
+                                        <audio id="audio-player"
+                                               src="@Url.Content(item.PathToSong)"
+                                               type="audio/mp3" controls="controls"
+                                               controlsList="nodownload">
+                                        </audio>
+                                    </div>}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>}
+</div>
+    
+*@

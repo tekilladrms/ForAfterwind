@@ -19,6 +19,7 @@ $(document).ready(function () {
     $(".owl-carousel").owlCarousel({
         loop: true,
         nav: true,
+        
 
         responsive: {
             0: {
@@ -27,6 +28,7 @@ $(document).ready(function () {
             }
         }
     });
+    
 
     $(document).ready(function () {
         $(".fancybox").fancybox();
@@ -71,7 +73,7 @@ $(document).ready(function () {
         function scrollHorizontally(e) {
             e = window.event || e;
             var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-            document.getElementById('hiddenInfo').scrollLeft -= (delta * 60); // Multiplied by 40
+            document.getElementById('hiddenInfo').scrollLeft -= (delta * 60); // Multiplied by 60
             e.preventDefault();
         }
         if (document.getElementById('hiddenInfo').addEventListener) {
@@ -94,14 +96,10 @@ function showInfo(e) {
     let collection;
 
 
-
-
     if (e.parentNode.classList.contains("musician")) {
         collection = musiciansPhotos;
     }
-    //else {
-    //    collection = albums;
-    //}
+    
 
     // проверка на уникальность
 
@@ -180,6 +178,10 @@ function displayInfo(collection) {
     }
 }
 
+function showInfoMobile(e) {
+
+}
+
 // --------------------- Audio ---------------------------
 
 function showAlbum(e) {
@@ -192,19 +194,19 @@ function showAlbum(e) {
 
     if (e.parentNode.classList.contains("video-album")) {
         collection = videoAlbums;
-        oldClassCollection = ["col-md-3", "col-sm-6"];
-        newClassCollection = ["col-md", "col-sm"];
+        oldClassCollection = ["col-md-3", "col-sm-6", "col-6"];
+        newClassCollection = ["col-md", "col-sm", "col"];
     }
     else if (e.parentNode.classList.contains("photo-album")) {
         collection = photoAlbums;
-        oldClassCollection = ["col-md-3", "col-sm-6"];
-        newClassCollection = ["col-md", "col-sm"];
+        oldClassCollection = ["col-md-3", "col-sm-6", "col-6"];
+        newClassCollection = ["col-md", "col-sm", "col"];
     }
     else {
         collection = albums;
         
-        oldClassCollection = ["col-md-3", "col-sm-6"];
-        newClassCollection = ["col-md", "col-sm"];
+        oldClassCollection = ["col-md-3", "col-sm-6", "col-6"];
+        newClassCollection = ["col-md", "col-sm", "col"];
     }
 
     // проверка на то, содержит ли еще какой-нибудь элемент класс active
@@ -264,6 +266,19 @@ function switchClass(element, oldClassCollection, newClassCollection) {
     
 }
 
+
+
+// Mobile menu
+
+function toggleMenu() {
+    if (document.getElementById("mobileMenu").classList.contains("hidden")) {
+        document.getElementById("mobileMenu").classList.remove("hidden");
+    }
+    else {
+        document.getElementById("mobileMenu").classList.add("hidden");
+    }
+    
+}
 
 
 

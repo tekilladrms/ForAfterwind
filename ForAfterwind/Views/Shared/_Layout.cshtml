@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -16,129 +17,101 @@
 
     <link rel="stylesheet" href="~/fonts/Main_font.ttf" />
 
+    <!-- Put this script tag to the <head> of your page -->
+    @*<script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
 
+        <script type="text/javascript">
+            VK.init({ apiId: API_ID, onlyWidgets: true });
+        </script>*@
 </head>
 <body>
     <div class="background__dark">
         <div class="container wrapper">
-            <div class="row">
-                <div class="d-flex col-lg-3 col-sm-2">
-                    <div class="logo">
-                        <a href="#">
-                            <img src="~/img/Logo_word.png" />
-                        </a>
+            <div class="">
+                
+                <nav class="navbar navbar-light light-blue lighten-4 row">
+
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/Logo_word.png" /></a>
+
+                    <!-- Collapse button -->
+                    <button class="navbar-toggler ml-auto" type="button" onclick="toggleMenu()">
+                        <img src="~/img/mobileMenuButton.png" alt="" />
+                    </button>
+
+                    <!-- Collapsible content -->
+                    <div class="navbar-collapse hidden" id="mobileMenu">
+
+                        <!-- Links -->
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="About" asp-action="Index">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Media" asp-action="Index">Media</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Blog" asp-action="Index">Blog</a>
+                            </li>
+                        </ul>
+                        <!-- Links -->
+
                     </div>
-                    @* -----------Кнопка для мобильной навигации-------------- *@
-                    @*<button type="button"
-                                class="mobile__menu-toggle collapsed"
-                                data-toggle="collapse"
-                                data-target="#navbar-main">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>*@
+                    <!-- Collapsible content -->
 
-                </div>
-                <div class="mobile__menu-button mobile__menu-toggle collapsed">
-                    <img src="~/img/mobileMenuButton.png" alt="" />
-
-                </div>
-
-                <div class="col-lg parent__menu">
-                    <ul class="menu d-flex justify-content-center">
-                        <li>
-                            @Html.ActionLink("Home", "Index", "Home")
-                        </li>
-
-                        <li>
-                            <a href="#">About Us</a>
-                            <ul>
-                                <li>
-                                    @Html.ActionLink("Band", "Band", "About")
-                                </li>
-
-                                <li>
-                                    @Html.ActionLink("Musicians", "Musicians", "About")
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-
-                            @Html.ActionLink("Media", "Index", "Media")
-                            <ul>
-                                <li>
-                                    @Html.ActionLink("Audio", "Audio", "Media")
-                                </li>
-
-                                <li>
-                                    @Html.ActionLink("Video", "Video", "Media")
-                                </li>
-
-                                <li>
-                                    @Html.ActionLink("Photo", "Photo", "Media")
-                                </li>
-                            </ul>
-                        </li>
-
-                        @*<li>
-                            @Html.ActionLink("Merch", "Index", "Merch")
-                        </li>*@
-
-                        <li>
-                            @Html.ActionLink("Blog", "Index", "Blog")
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-            <div id="mobileMenu">
-                <ul class="mobile__menu">
-                    <li>
-                        @Html.ActionLink("Home", "Index", "Home")
-                    </li>
-
-                    <li>
-                        <a href="#">About Us</a>
-                        <ul>
+                    <div class="parent__menu">
+                        <ul class="menu d-flex justify-content-center">
                             <li>
-                                @Html.ActionLink("Band", "Band", "About")
+                                @Html.ActionLink("Home", "Index", "Home")
                             </li>
 
                             <li>
-                                @Html.ActionLink("Musicians", "Musicians", "About")
+                                <a asp-controller="About" asp-action="Index">About Us</a>
+                                <ul>
+                                    <li>
+                                        @Html.ActionLink("Band", "Band", "About")
+                                    </li>
+
+                                    <li>
+                                        @Html.ActionLink("Musicians", "Musicians", "About")
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+
+                                @Html.ActionLink("Media", "Index", "Media")
+                                <ul>
+                                    <li>
+                                        @Html.ActionLink("Audio", "Audio", "Media")
+                                    </li>
+
+                                    <li>
+                                        @Html.ActionLink("Video", "Video", "Media")
+                                    </li>
+
+                                    <li>
+                                        @Html.ActionLink("Photo", "Photo", "Media")
+                                    </li>
+                                </ul>
+                            </li>
+
+
+
+                            <li>
+                                @Html.ActionLink("Blog", "Index", "Blog")
                             </li>
                         </ul>
-                    </li>
-
-                    <li>
-
-                        <a href="#">Media</a>
-                        <ul>
-                            <li>
-                                @Html.ActionLink("Audio", "Audio", "Media")
-                            </li>
-
-                            <li>
-                                @Html.ActionLink("Video", "Video", "Media")
-                            </li>
-
-                            <li>
-                                @Html.ActionLink("Photo", "Photo", "Media")
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        @Html.ActionLink("Merch", "Index", "Merch")
-                    </li>
-
-                    <li>
-                        @Html.ActionLink("Blog", "Index", "Blog")
-                    </li>
-                </ul>
-
+                    </div>
+                </nav>
+                <!--/.Navbar-->
+                
+                
             </div>
+
         </div>
     </div>
 

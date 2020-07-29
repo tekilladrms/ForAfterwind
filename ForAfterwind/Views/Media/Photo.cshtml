@@ -10,12 +10,12 @@
 
         </div>
 
-        <div id="hiddenInfo" class="row background__dark overflow-auto hiddenPhoto">
+        <div id="hiddenInfo" class="row background__dark overflow-auto hiddenPhoto ">
 
             @foreach (var el in Model)
             {
-            <div class="photo-album col-md-3 col-sm-6">
-                <div onclick="showAlbum(this)">
+            <div class="photo-album col-md-3 col-sm-6 col-6">
+                <div class="photo-album__title" onclick="showAlbum(this)">
                     <h3>@el.Name</h3>
                     <button class="close">Close</button>
                     <img class="photo-album_cover" src="@Url.Content(el.PathToCover)" alt="" />

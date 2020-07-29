@@ -1,0 +1,30 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "About";
+}
+
+    <div class="row about__links no-gutters">
+        <div class="col about__part">
+            <a asp-controller="About" asp-action="Band">
+                <div class="about__wrapper">
+                    <img id="about__slide" class="about__part-background" src="~/img/Backgrounds/About_2.jpg" alt="" />
+                </div>
+                <div class="title__content">
+                    <h2 class="about__part-title">Band</h2>
+                    <i class="about__part-icon fa fa-play-circle"></i>
+                </div>
+            </a>
+        </div>
+        <div class="col about__part">
+            <a asp-controller="About" asp-action="Musicians">
+                <div class="about__wrapper">
+                    <img id="about__slide" class="about__part-background" src="~/img/Backgrounds/About_musicians.jpg" alt="" />
+                </div>
+                <div class="title__content">
+                    <h2 class="about__part-title">Musicians</h2>
+                    <i class="about__part-icon fa fa-male"></i>
+                </div>
+            </a>
+        </div>
+    </div>

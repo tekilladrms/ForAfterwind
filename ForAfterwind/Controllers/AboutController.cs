@@ -15,22 +15,23 @@ namespace ForAfterwind.Controllers
         {
             db = context;
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
         public IActionResult Band()
         {
             return View();
         }
 
-        public IActionResult Musicians()
+        public async Task<IActionResult> Musicians()
         {
-            var musicians = db.Musicians.Include(x => x.SocialLinks).Include(x => x.Skills).AsNoTracking();
+            var musicians = await db.Musicians.Include(x => x.SocialLinks).Include(x => x.Skills).AsNoTracking().ToListAsync();
             
             
             return View(musicians);
         }
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
+        
     }
 }

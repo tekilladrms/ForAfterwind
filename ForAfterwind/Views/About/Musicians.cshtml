@@ -4,9 +4,9 @@
     ViewData["Title"] = "Musicians";
 }
 
-<div class="container musicians background__dark">
+<div class="container musicians">
 
-    <div class="row">
+    <div class="row musicians__desktop background__dark">
 
         @foreach (var el in Model)
         {
@@ -43,6 +43,46 @@
 
         }
 
+    </div>
+
+    <div class="musicians__mobile">
+        <div class="row owl-carousel owl-theme">
+            @foreach (var el in Model)
+            {
+                <div class="col-sm musician__mobile background__dark">
+                    <h2>@el.Name</h2>
+                    <div class="musician-photo__container" onclick="showInfoMobile(this)">
+                        <img class="musician__photo" src="@Url.Content(el.Photo)" />
+                        
+                        <div class="musician__mobile-skills">
+                            <h3>Skills:</h3>
+                        <ul>
+                            @foreach (var item in el.Skills)
+                            {
+                                <li>@item.Name</li>
+                            }
+                        </ul>
+                        </div>
+
+                    </div>
+                    <div class="links__mobile">
+                        <h3>Social links:</h3>
+                        <ul class="musician__links">
+                            @foreach (var item in el.SocialLinks)
+                            {
+                                <li>
+                                    <a href="@Url.Content(item.Path)" target="_blank">
+                                        <i class="fa fa-@Url.Content(item.Name)"></i>
+                                    </a>
+
+                                </li>
+                             }
+                        </ul>
+
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 
 </div>

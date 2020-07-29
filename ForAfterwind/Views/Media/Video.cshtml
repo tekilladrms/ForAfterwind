@@ -13,8 +13,8 @@
     <div id="hiddenInfo" class="row background__dark overflow-auto hiddenVideo">
         @foreach (var el in Model)
         {
-        <div class="video-album col-md-3 col-sm-6">
-            <div onclick="showAlbum(this)">
+        <div class="video-album col-md-3 col-sm-6 col-6">
+            <div class="video-album__title" onclick="showAlbum(this)">
                 <h3>@el.Name</h3>
                 <button class="close">Close</button>
                 <img class="video-album_cover" src="@Url.Content(el.PathToCover)" alt="@Url.Content(el.Name)" />

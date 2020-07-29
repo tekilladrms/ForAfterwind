@@ -2,22 +2,18 @@
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@{
-    ViewData["Title"] = Model.Title;
-}
+@{ ViewData["Title"] = Model.Title; }
 <div class="">
 
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg">
             <div class="post__content background__darkest overflow-auto">
 
                 <div>
                     @* Конвертируем обложку(byte[]) в Base64 для отображения *@
-                    @{
-                        var base64 = Convert.ToBase64String(Model.Cover);
-                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                    }
+                    @{ var base64 = Convert.ToBase64String(Model.Cover);
+                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64); }
                     <img class="post__view-img background__darkest" src="@imgSrc" />
                 </div>
                 <h1>@Model.Title</h1>
@@ -33,7 +29,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-3 other__posts-container">
             <h2 class="background__dark">Other posts</h2>
 
             <div class="background__dark other__posts overflow-auto">
@@ -42,15 +38,34 @@
                 @foreach (var el in ViewBag.OtherPosts)
                 {
                     <a asp-action="Article"
-                       asp-controller="Blog"
-                       asp-route-urlSlug="@el.UrlSlug">
+                    asp-controller="Blog"
+                    asp-route-urlSlug="@el.UrlSlug">
                         <h4>@el.Title</h4>
                     </a>
-                }
+                 }
 
             </div>
         </div>
     </div>
+    @*<div class="row blog__navigation">
+        <div class="col-6 blog__navigation-prev">
+            <button>
+                prev
+            </button>
+        </div>
+        <div class="col-6 blog__navigation-next">
+            <button>
+                next
+            </button>
+        </div>
+    </div>*@
 </div>
+
+
+<!-- Put this div tag to the place, where the Comments block will be -->
+@*<div id="vk_comments"></div>
+<script type="text/javascript">
+VK.Widgets.Comments("vk_comments", {limit: 5, attach: "*"});
+</script>*@
 
 

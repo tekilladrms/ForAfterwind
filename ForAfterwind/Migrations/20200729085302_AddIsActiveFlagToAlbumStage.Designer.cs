@@ -4,14 +4,16 @@ using ForAfterwind.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ForAfterwind.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200729085302_AddIsActiveFlagToAlbumStage")]
+    partial class AddIsActiveFlagToAlbumStage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +31,9 @@ namespace ForAfterwind.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -36,12 +41,7 @@ namespace ForAfterwind.Migrations
                     b.Property<int>("Progress")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProgressBarId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProgressBarId");
 
                     b.ToTable("AlbumStages");
                 });
@@ -170,31 +170,6 @@ namespace ForAfterwind.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PostCovers");
-                });
-
-            modelBuilder.Entity("ForAfterwind.Models.ProgressBar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProgressBars");
                 });
 
             modelBuilder.Entity("ForAfterwind.Models.Release", b =>
@@ -553,13 +528,6 @@ namespace ForAfterwind.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("ForAfterwind.Models.AlbumStage", b =>
-                {
-                    b.HasOne("ForAfterwind.Models.ProgressBar", null)
-                        .WithMany("albumStages")
-                        .HasForeignKey("ProgressBarId");
                 });
 
             modelBuilder.Entity("ForAfterwind.Models.Photo", b =>

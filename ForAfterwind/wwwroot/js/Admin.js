@@ -7,10 +7,11 @@ $(document).ready(function () {
     $("#photos").submit();
     $("#songs").submit();
     $("#videos").submit();
+    $("#albumstages").submit();
     
 
     $('textarea#tiny').tinymce({
-        height: 700,
+        height: 200,
         menubar: false,
         plugins: [
             'advlist autolink lists link image charmap print preview anchor',
@@ -42,4 +43,8 @@ function removeSongsFormEvents() {
 function removeVideosFormEvents() {
     $("#videos").submit();
     $("#addvideo").trigger("reset");
+}
+function removeAlbumStageFormEvents() {
+    $("#albumstages").submit();
+    $("#addlbumstage").trigger("reset");
 }

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ForAfterwind.Models.ProgressBar>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Progress bars";
+    Layout = "_AdminLayout";
+}
+
+@if (Model.Count() != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IsActive</th>
+                <th>Name</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var el in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => el.IsActive)</td>
+                    <td>@Html.DisplayFor(modelItem => el.Name)</td>
+                    
+                    <td></td>
+                    <td>
+                        <a asp-controller="Admin"
+                           asp-action="EditProgressBar"
+                           asp-route-id="@el.Id">
+                            Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Admin"
+                           asp-action="DeleteProgressBar"
+                           asp-route-id="@el.Id">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+
+
+            }
+        </tbody>
+
+    </table>
+
+
+}
+else
+{
+    <p>
+        No created entity "ProgressBar"
+    </p>
+}
+
+<div>
+    <a asp-controller="Admin"
+       asp-action="CreateProgressBar">
+        Create Progress bar
+    </a>
+</div>

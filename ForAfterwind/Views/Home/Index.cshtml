@@ -1,7 +1,36 @@
-﻿
-@{
-    ViewData["Title"] = "Home";
+﻿@model ForAfterwind.ViewModels.HomePageViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{ ViewData["Title"] = "Home"; }
+
+
+
+@foreach (var el in Model.progressBars)
+{
+<div class="row background__dark progress__bar">
+    <div class="col-lg">
+        <h3 class="progress__bar-title">
+            @el.Name
+        </h3>
+    </div>
+
+    @foreach (var item in el.albumStages)
+    {
+        <div class="col-lg col-md col-sm-6 col-6">
+            <h4 class="album__stage-title">
+                @item.Name
+            </h4>
+            
+            
+            <div class="bg-style">
+                <div>
+                    <div class="counter" data-cp-percentage="@item.Progress" data-cp-color="@el.Color"> </div>
+                </div>
+            
+            </div>
+        </div>
+        
+    }
+</div>
 }
-
-    
-

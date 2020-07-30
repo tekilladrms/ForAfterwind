@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ForAfterwind.Models.AlbumStage>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Album stages";
+    Layout = "_AdminLayout";
+
+}
+
+@if (Model.Count() != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IsActive</th>
+                <th>Name</th>
+                <th>Progress</th>
+                <th>Name of release</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var el in Model)
+            {
+                <tr>
+                    <td>@*@Html.DisplayFor(modelItem => el.IsActive)*@</td>
+                    <td>@Html.DisplayFor(modelItem => el.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => el.Progress)</td>
+                    <td></td>
+                    <td>
+                        <a asp-controller="Admin"
+                           asp-action="EditAlbumStage"
+                           asp-route-id="@el.Id">
+                            Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Admin"
+                           asp-action="DeleteAlbumStage"
+                           asp-route-id="@el.Id">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+
+
+            }
+        </tbody>
+
+    </table>
+
+    
+}
+else
+{
+    <p>
+        No created entity "AlbumStage"
+    </p>
+}
+
+<div>
+    <a asp-controller="Admin"
+       asp-action="CreateAlbumStage">
+        Create Album stage
+    </a>
+</div>

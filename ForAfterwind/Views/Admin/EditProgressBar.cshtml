@@ -1,0 +1,92 @@
+﻿@model ForAfterwind.Models.ProgressBar
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Edit progress bar";
+    Layout = "_AdminLayout";
+}
+
+
+    <h1>Edit progress bar</h1>
+
+    <form asp-controller="Admin"
+          asp-action="EditProgressBar"
+          method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Bar name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="favcolor">Выберите цвет</label>
+                    <input type="color" id="favcolor" name="favcolor" value="@Model.Color" />
+                </div>
+                <div class="form-group ">
+                    <label asp-for="IsActive" class="control-label">Отображать на странице</label>
+                    <input asp-for="IsActive" class="check-box" type="checkbox" />
+                </div>
+
+            </div>
+            <div class="col-lg">
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Description</label>
+                    <textarea asp-for="Description" id="tiny" rows="5" style="height: 200px;">
+                </textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+
+    </form>
+    
+    <div class="row">
+        <div class="col-lg-4">
+            <form asp-action="_AlbumStages"
+                  asp-route-id="@Model.Id"
+                  method="get" data-ajax="true"
+                  data-ajax-update="#ajaxalbumstages"
+                  id="albumstages">
+
+                <div id="ajaxalbumstages">
+
+                </div>
+            </form>
+            <hr />
+        </div>
+        <div class="col">
+            <form asp-action="CreateAlbumStage"
+                  data-ajax="true" method="post"
+                  data-ajax-update="#ajaxalbumstages"
+                  id="addlbumstage"
+                  data-ajax-mode="replace"
+                  data-ajax-complete="removeAlbumStageFormEvents()">
+
+                <input type="hidden" asp-for="@Model.Id" />
+
+                <div class="form-group">
+                    <label class="control-label">Name</label>
+                    <input type="text" name="name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Progress</label>
+                    <input type="number" name="progress" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Add" class="btn btn-primary" />
+                </div>
+                
+                
+            </form>
+        </div>
+    </div>

@@ -191,3 +191,10 @@ C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\bin\Debug\netcoreapp3.1\ap
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Auth\Login.cshtml.g.cs
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ViewImports.cshtml.g.cs
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\About\Index.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Home.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditAlbumStage.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AlbumStages.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\CreateProgressBar.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditProgressBar.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ProgressBars.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_AlbumStages.cshtml.g.cs

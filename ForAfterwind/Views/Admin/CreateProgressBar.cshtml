@@ -1,0 +1,39 @@
+﻿@model ForAfterwind.Models.ProgressBar
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Create progress bar";
+    Layout = "_AdminLayout";
+}
+
+    <h1>Create progress bar</h1>
+
+    <form asp-controller="Admin"
+          asp-action="CreateProgressBar"
+          method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Bar name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <p class="text-danger">Save this progress bar and click "edit" for add Album stages</p>
+            </div>
+            <div class="col-lg">
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Description</label>
+                    <textarea asp-for="Description" id="tiny" rows="5">
+                </textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+
+    </form>

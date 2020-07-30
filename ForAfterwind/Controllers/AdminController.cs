@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using ForAfterwind.Domain;
 using ForAfterwind.Models;
@@ -11,6 +12,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 
 namespace ForAfterwind.Controllers
 {
@@ -31,6 +34,23 @@ namespace ForAfterwind.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Home()
+        {
+            return View();
+        }
+
+        public IActionResult ProgressBars()
+        {
+            return View(db.ProgressBars.AsNoTracking());
+        }
+
+        [HttpGet]
+        public IActionResult AlbumStages()
+        {
+            return View(db.AlbumStages.AsNoTracking());
         }
 
         [HttpGet]
@@ -117,7 +137,41 @@ namespace ForAfterwind.Controllers
             return PartialView(db.Photos.Where(x => x.PhotoAlbumId == id).ToList());
         }
 
+        public async Task<PartialViewResult> _AlbumStages(int? id)
+        {
+            return PartialView(await db.AlbumStages.Where(x => x.ProgressBarId == id).ToListAsync());
+        }
+
         //Edit
+
+        [HttpGet]
+        public async Task<IActionResult> EditProgressBar(int? id)
+        {
+            return View(await db.ProgressBars.FirstOrDefaultAsync(el => el.Id == id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProgressBar(ProgressBar progressBar, System.Drawing.Color favcolor)
+        {
+            progressBar.Color = GetRGBFromARGB(favcolor.Name);
+
+            db.ProgressBars.Update(progressBar);
+            await db.SaveChangesAsync();
+            return RedirectToAction("ProgressBars");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAlbumStage(int? id)
+        {
+            return View(await db.AlbumStages.FirstOrDefaultAsync(el => el.Id == id));
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditAlbumStage(AlbumStage albumStage)
+        {
+            db.AlbumStages.Update(albumStage);
+            await db.SaveChangesAsync();
+            return RedirectToAction("AlbumStages");
+        }
 
         public async Task<PartialViewResult> EditLink(int? id, string name, string path)
         {
@@ -310,6 +364,43 @@ namespace ForAfterwind.Controllers
         }
 
         //Create
+
+        [HttpGet]
+        public IActionResult CreateProgressBar()
+        {
+            ProgressBar progressBar = new ProgressBar();
+            return View(progressBar);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateProgressBar(ProgressBar progressBar)
+        {
+            await db.ProgressBars.AddAsync(progressBar);
+            await db.SaveChangesAsync();
+            return RedirectToAction("ProgressBars");
+        }
+
+        [HttpGet]
+        public IActionResult CreateAlbumStage()
+        {
+            AlbumStage albumStage = new AlbumStage();
+            return View(albumStage);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAlbumStage(int id, string name, int progress)
+        {
+            //if(await db.AlbumStages.Where(stage => stage.ProgressBarId == id).CountAsync() > 4)
+            //    return StatusCode()
+
+            AlbumStage albumStage = new AlbumStage();
+            albumStage.Name = name;
+            albumStage.Progress = progress;
+            albumStage.ProgressBarId = id;
+            await db.AlbumStages.AddAsync(albumStage);
+            await db.SaveChangesAsync();
+            return StatusCode(200);
+        }
 
         [HttpGet]
         public IActionResult CreatePost()
@@ -696,6 +787,15 @@ namespace ForAfterwind.Controllers
             return RedirectToAction("Blog");
         }
 
+        
+
+        public async Task<IActionResult> DeleteProgressBar(int? id)
+        {
+            db.ProgressBars.Remove(await db.ProgressBars.FirstOrDefaultAsync(el => el.Id == id));
+            await db.SaveChangesAsync();
+            return RedirectToAction("ProgressBars");
+        }
+
 
         public void DeleteSkill(int? id)
         {
@@ -734,7 +834,13 @@ namespace ForAfterwind.Controllers
             db.SaveChanges();
             DeleteFileFromDirectory(photo.PathToPhoto);
         }
-        
+        public void DeleteAlbumStage(int? id)
+        {
+            db.AlbumStages.Remove(db.AlbumStages.FirstOrDefault(el => el.Id == id));
+            db.SaveChanges();
+            
+        }
+
         //Other
 
         void DeleteRelatedEntities(int? id)
@@ -812,6 +918,11 @@ namespace ForAfterwind.Controllers
             result += String.Join("_", postTitle.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
 
             return result;
+        }
+
+        protected string GetRGBFromARGB(string color)
+        {
+            return $"#{color.Substring(2)}";
         }
 
     }

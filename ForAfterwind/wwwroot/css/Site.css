@@ -230,7 +230,63 @@ h1, h2, h3, h4 {
     display: flex;
 }
 
+/*---------------- Home Controller ----------------*/
+/*Index*/
+/*progress bar*/
+.bg-style {
+    flex-direction: row;
+}
 
+.counter {
+    display: inline-flex;
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    max-width: 100%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 500;
+    transition: height .2s ease-in-out;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.percentage {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 0;
+    right: 0;
+    vertical-align: middle;
+    transform: translate3d(0,-50%,0);
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.progress__bar {
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.progress__bar-title {
+    font-family: Main_font;
+    font-weight: 200;
+    padding-left: 2%;
+    padding-top: 4%;
+    font-size: 1.25rem;
+    text-align: left;
+}
+
+
+body {
+    text-align: center;
+}
 
 /*---------------- About Controller ----------------*/
 /*Index*/
@@ -1038,6 +1094,10 @@ h4 {
         display: none;
     }
 
+    /*HomeController*/
+    /*Index*/
+
+
     /*photo*/
     .musician-photo {
         max-height: 70vh;
@@ -1306,9 +1366,11 @@ h4 {
     audio {
         width: 40vh;
     }
+
     .hiddenAudio {
         justify-content: space-around;
     }
+
     .hiddenAudio {
         max-height: 70vh;
     }
@@ -1335,7 +1397,7 @@ h4 {
 
 @media screen and (max-width: 421px) {
     /*left*/
-    .left{
+    .left {
         left: 10%;
     }
 }

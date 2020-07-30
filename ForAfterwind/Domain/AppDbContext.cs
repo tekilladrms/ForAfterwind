@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
+using System;
 
 namespace ForAfterwind.Domain
 {
@@ -33,6 +33,10 @@ namespace ForAfterwind.Domain
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<PostCover> PostCovers { get; set; }
+
+        public DbSet<AlbumStage> AlbumStages { get; set; }
+
+        public DbSet<ProgressBar> ProgressBars { get; set; }
         
     }
 }

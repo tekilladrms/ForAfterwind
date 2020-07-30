@@ -14,29 +14,37 @@
 
     <div class="container-fluid">
         <div class="row background__dark">
-            
+
             <div class="col-md-11">
                 <a asp-controller="Admin" asp-action="Index"><h2>Admin panel</h2></a>
-                
+
             </div>
 
             <div class="col logout__link">
                 @if (User.Identity.IsAuthenticated)
                 {
-        <a asp-controller="Auth" asp-action="Logout">Logout</a>}
+    <a asp-controller="Auth" asp-action="Logout">Logout</a>}
             </div>
-            
+
         </div>
         <div class="row">
             <div class="col-md-2 background__dark left__panel">
                 <ul>
+                    <li>
+                        <a asp-controller="Admin" asp-action="Home">
+                            <div class="left__panel-link">
+                                Home-page
+                            </div>
+                        </a>
+
+                    </li>
                     <li>
                         <a asp-controller="Admin" asp-action="Musician">
                             <div class="left__panel-link">
                                 Musicians
                             </div>
                         </a>
-                        
+
                     </li>
                     <li>
                         <a asp-controller="Admin" asp-action="Audio">
@@ -44,7 +52,7 @@
                                 Releases
                             </div>
                         </a>
-                        
+
                     </li>
                     <li>
                         <a asp-controller="Admin" asp-action="Video">
@@ -52,7 +60,7 @@
                                 Video
                             </div>
                         </a>
-                        
+
                     </li>
                     <li>
                         <a asp-controller="Admin" asp-action="Photo">
@@ -60,7 +68,7 @@
                                 Photo
                             </div>
                         </a>
-                        
+
                     </li>
                     <li>
                         <a asp-controller="Admin" asp-action="Blog">
@@ -68,7 +76,7 @@
                                 Blog
                             </div>
                         </a>
-                        
+
                     </li>
                 </ul>
             </div>
@@ -82,6 +90,8 @@
 
     <script src="~/libs/jquery/jquery-3.4.1.min.js"></script>
     <script src="~/libs/jquery/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
     <script src="~/js/Admin.js"></script>

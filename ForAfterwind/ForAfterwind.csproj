@@ -36,6 +36,16 @@
     <Compile Remove="Migrations\20200523070406_AddPhotoAndPhotoAlbums.Designer.cs" />
     <Compile Remove="Migrations\20200704115958_AddingCoverToPosts.cs" />
     <Compile Remove="Migrations\20200704115958_AddingCoverToPosts.Designer.cs" />
+    <Compile Remove="Migrations\20200729122902_AddPointerOnProgressBarInAlbumStage.cs" />
+    <Compile Remove="Migrations\20200729122902_AddPointerOnProgressBarInAlbumStage.Designer.cs" />
+    <Compile Remove="Migrations\20200729123343_AddPointerOnProgressBarInAlbumStage1.cs" />
+    <Compile Remove="Migrations\20200729123343_AddPointerOnProgressBarInAlbumStage1.Designer.cs" />
+    <Compile Remove="Migrations\20200729124715_AddPointerOnProgressBarInAlbumStage.cs" />
+    <Compile Remove="Migrations\20200729124715_AddPointerOnProgressBarInAlbumStage.Designer.cs" />
+    <Compile Remove="Migrations\20200730002847_AddColorToProgressBar.cs" />
+    <Compile Remove="Migrations\20200730002847_AddColorToProgressBar.Designer.cs" />
+    <Compile Remove="Migrations\20200730010812_AddColorToProgressBar.cs" />
+    <Compile Remove="Migrations\20200730010812_AddColorToProgressBar.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

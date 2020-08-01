@@ -1,0 +1,46 @@
+﻿@model ForAfterwind.Models.Greeting
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Create Greeting";
+    Layout = "_AdminLayout";
+
+}
+
+    <h1>Create Greeting</h1>
+
+    <form asp-controller="Admin"
+          asp-action="CreateGreeting"
+          enctype="multipart/form-data"
+          method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Выберите обложку</label>
+                    <input type="file" name="uploadedFile" accept="image/*" />
+                </div>
+                
+            </div>
+            <div class="col-lg">
+                <div class="form-group">
+                    <label asp-for="Body" class="control-label">Body</label>
+                    <textarea asp-for="Body" id="tiny" rows="5">
+                </textarea>
+                    <span asp-validation-for="Body" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+
+    </form>

@@ -8,6 +8,7 @@ namespace ForAfterwind.ViewModels
 {
     public class HomePageViewModel
     {
+        public IEnumerable<Greeting> greetings { get; set; }
         public IEnumerable<ProgressBar> progressBars { get; set; }
     }
 }

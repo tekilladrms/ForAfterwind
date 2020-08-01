@@ -12,8 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+
 
 namespace ForAfterwind.Controllers
 {
@@ -42,45 +41,44 @@ namespace ForAfterwind.Controllers
             return View();
         }
 
-        public IActionResult ProgressBars()
+        public async Task<IActionResult> ProgressBars()
         {
-            return View(db.ProgressBars.AsNoTracking());
+            return View(await db.ProgressBars.AsNoTracking().ToListAsync());
+        }
+
+        public async Task<IActionResult> Greetings()
+        {
+            return View(await db.Greetings.AsNoTracking().ToListAsync());
         }
 
         [HttpGet]
-        public IActionResult AlbumStages()
+        public async Task<IActionResult> Video()
         {
-            return View(db.AlbumStages.AsNoTracking());
+            return View(await db.VideoAlbums.AsNoTracking().ToListAsync());
         }
 
         [HttpGet]
-        public IActionResult Video()
+        public async Task<IActionResult> Audio()
         {
-            return View(db.VideoAlbums.AsNoTracking());
+            return View(await db.Releases.AsNoTracking().ToListAsync());
         }
 
         [HttpGet]
-        public IActionResult Audio()
+        public async Task<IActionResult> Photo()
         {
-            return View(db.Releases.AsNoTracking());
+            return View(await db.PhotoAlbums.AsNoTracking().ToListAsync());
         }
 
         [HttpGet]
-        public IActionResult Photo()
+        public async Task<IActionResult> Musician()
         {
-            return View(db.PhotoAlbums.AsNoTracking());
+            return View(await db.Musicians.AsNoTracking().ToListAsync());
         }
 
         [HttpGet]
-        public IActionResult Musician()
+        public async Task<IActionResult> Blog()
         {
-            return View(db.Musicians.AsNoTracking());
-        }
-
-        [HttpGet]
-        public IActionResult Blog()
-        {
-            return View(db.Posts.AsNoTracking());    
+            return View(await db.Posts.AsNoTracking().ToListAsync());    
         }
 
         // CRUD
@@ -88,61 +86,84 @@ namespace ForAfterwind.Controllers
         //PartialViews
 
         [HttpGet]
-        public PartialViewResult _partialSkills(int? id)
+        public async Task<PartialViewResult> _partialSkills(int? id)
         {
             if (id == null)
             {
                 return PartialView();
             }
-            return PartialView(db.Skills.Where(x => x.MusicianId == id).ToList());
+            return PartialView(await db.Skills.Where(skill => skill.MusicianId == id).ToListAsync());
         }
 
         [HttpGet]
-        public PartialViewResult _socialLinks(int? id)
+        public async Task<PartialViewResult> _socialLinks(int? id)
         {
             if (id == null)
             {
                 return PartialView();
             }
-            return PartialView(db.SocialLinks.Where(x => x.MusicianId == id).ToList());
+            return PartialView(await db.SocialLinks.Where(link => link.MusicianId == id).ToListAsync());
         }
 
         [HttpGet]
-        public PartialViewResult _partialSongs(int? id)
+        public async Task<PartialViewResult> _partialSongs(int? id)
         {
             if (id == null)
             {
                 return PartialView();
             }
-            return PartialView(db.Songs.Where(x => x.ReleaseId == id).ToList());
+            return PartialView(await db.Songs.Where(song => song.ReleaseId == id).ToListAsync());
         }
 
         [HttpGet]
-        public PartialViewResult _partialVideos(int? id)
+        public async Task<PartialViewResult> _partialVideos(int? id)
         {
             if (id == null)
             {
                 return PartialView();
             }
-            return PartialView(db.Videos.Where(x => x.VideoAlbumId == id).ToList());
+            return PartialView(await db.Videos.Where(video => video.VideoAlbumId == id).ToListAsync());
         }
 
         [HttpGet]
-        public PartialViewResult _partialPhotos(int? id)
+        public async Task<PartialViewResult> _partialPhotos(int? id)
         {
             if (id == null)
             {
                 return PartialView();
             }
-            return PartialView(db.Photos.Where(x => x.PhotoAlbumId == id).ToList());
+            return PartialView(await db.Photos.Where(photo => photo.PhotoAlbumId == id).ToListAsync());
         }
 
         public async Task<PartialViewResult> _AlbumStages(int? id)
         {
-            return PartialView(await db.AlbumStages.Where(x => x.ProgressBarId == id).ToListAsync());
+            return PartialView(await db.AlbumStages.Where(stage => stage.ProgressBarId == id).ToListAsync());
+        }
+
+        public PartialViewResult _Picture(IFormFile uploadedFile)
+        {
+            return PartialView(uploadedFile);
         }
 
         //Edit
+
+        [HttpGet]
+        public async Task<IActionResult> EditGreeting(int? id)
+        {
+            return View(await db.Greetings.FirstOrDefaultAsync(greeting => greeting.Id == id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditGreeting(Greeting greeting, IFormFile uploadedFile)
+        {
+            if(uploadedFile != null)
+            {
+                greeting.Cover = await FileToByteAsync(uploadedFile);
+            }
+            db.Greetings.Update(greeting);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Greetings");
+        }
 
         [HttpGet]
         public async Task<IActionResult> EditProgressBar(int? id)
@@ -153,7 +174,15 @@ namespace ForAfterwind.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProgressBar(ProgressBar progressBar, System.Drawing.Color favcolor)
         {
-            progressBar.Color = GetRGBFromARGB(favcolor.Name);
+            if(favcolor.IsKnownColor)
+            {
+                progressBar.Color = favcolor.Name;
+            }
+            else 
+            {
+                progressBar.Color = GetRGBFromARGB(favcolor.Name);
+            }
+            
 
             db.ProgressBars.Update(progressBar);
             await db.SaveChangesAsync();
@@ -180,7 +209,7 @@ namespace ForAfterwind.Controllers
             link.Path = path;
             db.SocialLinks.Update(link);
             await db.SaveChangesAsync();
-            return _socialLinks(link.MusicianId);
+            return await _socialLinks(link.MusicianId);
         }
 
         [HttpGet]
@@ -364,6 +393,24 @@ namespace ForAfterwind.Controllers
         }
 
         //Create
+
+        [HttpGet]
+        public IActionResult CreateGreeting()
+        {
+            return View(new Greeting());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateGreeting(Greeting greeting, IFormFile uploadedFile)
+        {
+            if (uploadedFile != null)
+            {
+                greeting.Cover = await FileToByteAsync(uploadedFile);
+            }
+            await db.Greetings.AddAsync(greeting);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Greetings");
+        }
 
         [HttpGet]
         public IActionResult CreateProgressBar()
@@ -572,79 +619,85 @@ namespace ForAfterwind.Controllers
 
 
         [HttpPost]
-        public void CreateSkill(int? id, string name)
+        public async Task<StatusCodeResult> CreateSkill(int? id, string name)
         {
             Skill skill = new Skill();
             skill.Name = name;
             skill.MusicianId = id;
-            skill.Musician = db.Musicians.FirstOrDefault(x => x.Id == id);
+            skill.Musician = await db.Musicians.FirstOrDefaultAsync(musician => musician.Id == id);
 
-            db.Skills.Add(skill);
-            db.SaveChanges();
-            
+            await db.Skills.AddAsync(skill);
+            await db.SaveChangesAsync();
+
+            return StatusCode(200);
         }
 
         [HttpPost]
-        public void CreateLink(int? id, string name, string url)
+        public async Task<StatusCodeResult> CreateLink(int? id, string name, string url)
         {
             SocialLink link = new SocialLink();
             link.Name = name.ToLower();
             link.MusicianId = id;
             link.Path = url;
-            link.Musician = db.Musicians.FirstOrDefault(x => x.Id == id);
-            db.SocialLinks.Add(link);
-            db.SaveChanges();
+            link.Musician = await db.Musicians.FirstOrDefaultAsync(musician => musician.Id == id);
+            await db.SocialLinks.AddAsync(link);
+            await db.SaveChangesAsync();
+
+            return StatusCode(200);
         }
 
         [HttpPost]
-        public void AddVideo(int? id, IFormFile uploadedFile)
+        public async Task<StatusCodeResult> AddVideo(int? id, IFormFile uploadedFile)
         {
-            VideoAlbum videoAlbum = db.VideoAlbums.FirstOrDefault(x => x.Id == id);
+            VideoAlbum videoAlbum = await db.VideoAlbums.FirstOrDefaultAsync(videoAlbum => videoAlbum.Id == id);
             Video video = new Video();
             string path = $"/Media/Video/{videoAlbum.Name}/{uploadedFile.FileName}";
 
             using (FileStream fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create, FileAccess.Write))
             {
-                uploadedFile.CopyTo(fileStream);
+                await uploadedFile.CopyToAsync(fileStream);
             }
             video.Name = uploadedFile.FileName;
             video.VideoAlbumId = id;
             video.PathToVideo = path;
-            video.VideoAlbum = db.VideoAlbums.FirstOrDefault(x => x.Id == id);
-            db.Videos.Add(video);
-            db.SaveChanges();
+            video.VideoAlbum = videoAlbum;
+            await db.Videos.AddAsync(video);
+            await db.SaveChangesAsync();
+
+            return StatusCode(200);
             
         }
 
         [HttpPost]
-        public void AddPhotos(int? id, IEnumerable<IFormFile> files)
+        public async Task<StatusCodeResult> AddPhotos(int? id, IEnumerable<IFormFile> files)
         {
-            PhotoAlbum photoAlbum = db.PhotoAlbums.FirstOrDefault(x => x.Id == id);
+            PhotoAlbum photoAlbum = await db.PhotoAlbums.FirstOrDefaultAsync(album => album.Id == id);
 
             foreach (var file in files)
             {
                 string path = $"/Media/Photo albums/{photoAlbum.Name}/{file.FileName}";
                 using (FileStream fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create, FileAccess.Write))
                 {
-                    file.CopyTo(fileStream);
+                    await file.CopyToAsync(fileStream);
                 }
                 Photo photo = new Photo();
                 photo.PathToPhoto = path;
                 photo.PhotoAlbum = photoAlbum;
                 photo.PhotoAlbumId = id;
-                db.Photos.Add(photo);
+                await db.Photos.AddAsync(photo);
             }
-            db.SaveChanges();
-            
+            await db.SaveChangesAsync();
+
+            return StatusCode(200);
         }
 
         [HttpPost]
-        public void AddSongs(int? id, IEnumerable<IFormFile> uploadedFiles)
+        public async Task<StatusCodeResult> AddSongs(int? id, IEnumerable<IFormFile> uploadedFiles)
         {
 
             if (uploadedFiles != null)
             {
-                Release release = db.Releases.FirstOrDefault(x => x.Id == id);
+                Release release = await db.Releases.FirstOrDefaultAsync(release => release.Id == id);
 
                 foreach(var file in uploadedFiles)
                 {
@@ -653,7 +706,7 @@ namespace ForAfterwind.Controllers
                     using (var fileStream = new FileStream(
                         _appEnvironment.WebRootPath + path, FileMode.Create))
                     {
-                        file.CopyTo(fileStream);
+                        await file.CopyToAsync(fileStream);
                     }
                     Song song = new Song();
                     song.Name = file.FileName;
@@ -670,11 +723,13 @@ namespace ForAfterwind.Controllers
                         song.Type = TypesOfReleases.Video;
                     }
                     
-                    db.Songs.Add(song);
+                    await db.Songs.AddAsync(song);
                 }
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
+                
             }
+            return StatusCode(200);
 
         }
 
@@ -787,58 +842,73 @@ namespace ForAfterwind.Controllers
             return RedirectToAction("Blog");
         }
 
-        
-
         public async Task<IActionResult> DeleteProgressBar(int? id)
         {
-            db.ProgressBars.Remove(await db.ProgressBars.FirstOrDefaultAsync(el => el.Id == id));
+            db.ProgressBars.Remove(await db.ProgressBars.FirstOrDefaultAsync(progressBar => progressBar.Id == id));
             await db.SaveChangesAsync();
             return RedirectToAction("ProgressBars");
         }
 
+        public async Task<IActionResult> DeleteGreeting(int? id)
+        {
+            db.Greetings.Remove(await db.Greetings.FirstOrDefaultAsync(greeting => greeting.Id == id)); 
+            await db.SaveChangesAsync();
+            return RedirectToAction("Greetings");
+        }
 
-        public void DeleteSkill(int? id)
+
+        public async Task<StatusCodeResult> DeleteSkill(int? id)
         {
-            Skill skill = db.Skills.FirstOrDefault(x => x.Id == id);
+            Skill skill = await db.Skills.FirstOrDefaultAsync(skill => skill.Id == id);
             db.Skills.Remove(skill);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
+
+            return StatusCode(200);
         }
         
-        public void DeleteLink(int? id)
+        public async Task<StatusCodeResult> DeleteLink(int? id)
         {
-            SocialLink link = db.SocialLinks.FirstOrDefault(x => x.Id == id);
+            SocialLink link = await db.SocialLinks.FirstOrDefaultAsync(link => link.Id == id);
             db.SocialLinks.Remove(link);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
+            return StatusCode(200);
         }
         
-        public void DeleteSong(int? id)
+        public async Task<StatusCodeResult> DeleteSong(int? id)
         {
-            Song song = db.Songs.FirstOrDefault(x => x.Id == id);
+            Song song = await db.Songs.FirstOrDefaultAsync(song => song.Id == id);
             db.Songs.Remove(song);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             DeleteFileFromDirectory(song.PathToSong);
+
+            return StatusCode(200);
         }
         
-        public void DeleteVideo(int? id)
+        public async Task<StatusCodeResult> DeleteVideo(int? id)
         {
-            Video video = db.Videos.FirstOrDefault(x => x.Id == id);
+            Video video = await db.Videos.FirstOrDefaultAsync(video => video.Id == id);
             db.Videos.Remove(video);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             DeleteFileFromDirectory(video.PathToVideo);
+
+            return StatusCode(200);
         }
         
-        public void DeletePhoto(int? id)
+        public async Task<StatusCodeResult> DeletePhoto(int? id)
         {
-            Photo photo = db.Photos.FirstOrDefault(x => x.Id == id);
+            Photo photo = await db.Photos.FirstOrDefaultAsync(photo => photo.Id == id);
             db.Photos.Remove(photo);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             DeleteFileFromDirectory(photo.PathToPhoto);
+
+            return StatusCode(200);
         }
-        public void DeleteAlbumStage(int? id)
+
+        public async Task<StatusCodeResult> DeleteAlbumStage(int? id)
         {
-            db.AlbumStages.Remove(db.AlbumStages.FirstOrDefault(el => el.Id == id));
-            db.SaveChanges();
-            
+            db.AlbumStages.Remove(await db.AlbumStages.FirstOrDefaultAsync(stage => stage.Id == id));
+            await db.SaveChangesAsync();
+            return StatusCode(200);
         }
 
         //Other

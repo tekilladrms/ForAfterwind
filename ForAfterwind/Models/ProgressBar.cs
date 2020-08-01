@@ -19,6 +19,7 @@ namespace ForAfterwind.Models
 
         public string Color { get; set; }
 
+        
         public ICollection<AlbumStage> albumStages { get; set; }
 
         public ProgressBar()

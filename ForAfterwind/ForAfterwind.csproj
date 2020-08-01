@@ -46,6 +46,8 @@
     <Compile Remove="Migrations\20200730002847_AddColorToProgressBar.Designer.cs" />
     <Compile Remove="Migrations\20200730010812_AddColorToProgressBar.cs" />
     <Compile Remove="Migrations\20200730010812_AddColorToProgressBar.Designer.cs" />
+    <Compile Remove="Migrations\20200731081815_AddGreetings.cs" />
+    <Compile Remove="Migrations\20200731081815_AddGreetings.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

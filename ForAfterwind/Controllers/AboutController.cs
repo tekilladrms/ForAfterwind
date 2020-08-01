@@ -27,7 +27,11 @@ namespace ForAfterwind.Controllers
 
         public async Task<IActionResult> Musicians()
         {
-            var musicians = await db.Musicians.Include(x => x.SocialLinks).Include(x => x.Skills).AsNoTracking().ToListAsync();
+            var musicians = await db.Musicians
+                .Include(x => x.SocialLinks)
+                .Include(x => x.Skills)
+                .AsNoTracking()
+                .ToListAsync();
             
             
             return View(musicians);

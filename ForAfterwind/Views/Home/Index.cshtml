@@ -4,28 +4,54 @@
 
 @{ ViewData["Title"] = "Home"; }
 
+<div class="">
+    @foreach(var greeting in Model.greetings)
+    {
+        <div class="row greeting">
+            <div class="col greeting__container">
+                <h1>@greeting.Name</h1>
+                @if (greeting.Cover != null)
+                {
+                    <div class="greeting__image">
+                        @* Конвертируем обложку(byte[]) в Base64 для отображения *@
+                        @{ var base64 = Convert.ToBase64String(greeting.Cover);
+                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64); }
+                        <img class="post__view-img background__darkest" src="@imgSrc" />
+                    </div>
+                }
+                
+                <div class="greeting__body">
+                    @Html.Raw(greeting.Body)
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
 
 
-@foreach (var el in Model.progressBars)
+
+
+@foreach (var progressBar in Model.progressBars)
 {
 <div class="row background__dark progress__bar">
     <div class="col-lg">
         <h3 class="progress__bar-title">
-            @el.Name
+            @progressBar.Name
         </h3>
     </div>
 
-    @foreach (var item in el.albumStages)
+    @foreach (var albumStage in progressBar.albumStages)
     {
         <div class="col-lg col-md col-sm-6 col-6">
             <h4 class="album__stage-title">
-                @item.Name
+                @albumStage.Name
             </h4>
             
             
             <div class="bg-style">
                 <div>
-                    <div class="counter" data-cp-percentage="@item.Progress" data-cp-color="@el.Color"> </div>
+                    <div class="counter" data-cp-percentage="@albumStage.Progress" data-cp-color="@progressBar.Color"> </div>
                 </div>
             
             </div>

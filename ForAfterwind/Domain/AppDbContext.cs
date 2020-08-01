@@ -37,6 +37,7 @@ namespace ForAfterwind.Domain
         public DbSet<AlbumStage> AlbumStages { get; set; }
 
         public DbSet<ProgressBar> ProgressBars { get; set; }
+        public DbSet<Greeting> Greetings { get; set; }
         
     }
 }

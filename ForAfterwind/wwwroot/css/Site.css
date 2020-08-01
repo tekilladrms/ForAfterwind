@@ -232,6 +232,15 @@ h1, h2, h3, h4 {
 
 /*---------------- Home Controller ----------------*/
 /*Index*/
+
+/*Greetings*/
+
+.greeting__container {
+    text-align: start;
+}
+.greeting__body{
+    color: #fff;
+}
 /*progress bar*/
 .bg-style {
     flex-direction: row;
@@ -239,7 +248,7 @@ h1, h2, h3, h4 {
 
 .counter {
     display: inline-flex;
-    cursor: pointer;
+/*    cursor: pointer;*/
     width: 150px;
     height: 150px;
     max-width: 100%;
@@ -281,12 +290,18 @@ canvas {
     padding-top: 4%;
     font-size: 1.25rem;
     text-align: left;
+    cursor: default;
+}
+.album__stage-title {
+    position: relative;
+    left: 10%;
+    text-align: start;
 }
 
 
-body {
+/*body {
     text-align: center;
-}
+}*/
 
 /*---------------- About Controller ----------------*/
 /*Index*/

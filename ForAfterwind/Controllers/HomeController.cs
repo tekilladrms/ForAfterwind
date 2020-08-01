@@ -22,11 +22,16 @@ namespace ForAfterwind.Controllers
         public async Task<IActionResult> Index()
         {
             HomePageViewModel model = new HomePageViewModel();
+
             model.progressBars = await db.ProgressBars
                 .Where(bar => bar.IsActive == true)
                 .Include(bar => bar.albumStages)
                 .AsNoTracking()
                 .ToListAsync();
+
+            model.greetings = await db.Greetings
+                .Where(greeting => greeting.IsActive == true)
+                .AsNoTracking().ToListAsync();
             
 
             return View(model);

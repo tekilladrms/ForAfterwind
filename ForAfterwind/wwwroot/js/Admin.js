@@ -8,7 +8,10 @@ $(document).ready(function () {
     $("#songs").submit();
     $("#videos").submit();
     $("#albumstages").submit();
-    
+    $("#cities").submit();
+    $("#markers").submit();
+
+
 
     $('textarea#tiny').tinymce({
         height: 200,
@@ -22,6 +25,54 @@ $(document).ready(function () {
     });
 
 });
+
+
+
+
+$(function () {
+    $('#IsOnMap').on('change', function () {
+        if ($('#IsOnMap').prop('checked')) {
+            $('#marker').removeClass('hidden');
+        } else {
+            $('#marker').addClass('hidden');
+        }
+    });
+
+    $("#map").click(function (event) {
+        event = event || window.Event;
+        
+        $("#top").val(PixelsToPercents(event.offsetY, $("#map").height()).toFixed());
+        $("#left").val(PixelsToPercents(event.offsetX, $("#map").width()).toFixed());
+
+    });
+
+    $("#map").on("click", ".marker", function () {
+        if ($(this).children().last().hasClass("hidden")) {
+            $(this).children().removeClass("hidden");
+            
+        }
+        else {
+            $(this).children().addClass("hidden");
+        }
+        
+        $(".pointer").removeClass("hidden");
+    });
+
+   
+
+});
+
+
+
+function onDragOver(event) {
+    event.preventDefault();
+}
+
+
+
+function PixelsToPercents(value, parentValue) {
+    return value / (parentValue / 100);
+}
 
 function removeSkillsFormEvents() {
     $("#skills").submit();
@@ -48,3 +99,12 @@ function removeAlbumStageFormEvents() {
     $("#albumstages").submit();
     $("#addlbumstage").trigger("reset");
 }
+function removeCitiesFormEvents() {
+    $("#cities").submit();
+    $("#markers").submit();
+    $("#addcity").trigger("reset");
+
+
+}
+
+

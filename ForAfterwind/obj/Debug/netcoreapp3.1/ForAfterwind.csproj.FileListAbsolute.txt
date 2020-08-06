@@ -200,3 +200,9 @@ C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Ra
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\CreateGreeting.cshtml.g.cs
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Greetings.cshtml.g.cs
 C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditGreeting.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\PhotoAlbums.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\CreateCity.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\PhotoMap.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_Cities.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_Markers.cshtml.g.cs
+C:\Users\tekil\source\repos\ForAfterwind\ForAfterwind\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPatrial.cshtml.g.cs

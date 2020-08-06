@@ -48,6 +48,8 @@
     <Compile Remove="Migrations\20200730010812_AddColorToProgressBar.Designer.cs" />
     <Compile Remove="Migrations\20200731081815_AddGreetings.cs" />
     <Compile Remove="Migrations\20200731081815_AddGreetings.Designer.cs" />
+    <Compile Remove="Migrations\20200801104659_AddMarkersAndPoints.cs" />
+    <Compile Remove="Migrations\20200801104659_AddMarkersAndPoints.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

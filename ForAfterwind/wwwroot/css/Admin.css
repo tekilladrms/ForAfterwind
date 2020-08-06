@@ -109,3 +109,31 @@ a {
 }
 
 
+.hidden {
+    display: none;
+}
+
+.marker {
+    z-index: 9999;
+    position: absolute;
+    display: flex;
+}
+.marker__text {
+    padding-left: 5px;
+    color: #fff;
+}
+    .marker:hover > .marker__text  {
+        display: flex;
+        cursor: pointer;
+        
+    }
+
+
+
+#map {
+    position: relative;
+}
+
+.markers__menu li a {
+    text-decoration: none;
+}

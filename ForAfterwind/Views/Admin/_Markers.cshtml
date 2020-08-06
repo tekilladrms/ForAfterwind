@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ForAfterwind.Models.City>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+
+}
+
+<img class="map__img" src="~/img/Backgrounds/russia-outline-map_Clipart_svg_File.svg" alt="" />
+@foreach (var city in Model)
+{
+    string top = city.Top.ToString() + "%";
+    string left = city.Left.ToString() + "%";
+
+    <div id="@city.Id" class="marker" style="top:@top; left:@left">
+        
+
+        <div class="pointer">
+            <i class="fa fa-map-marker" aria-hidden="true" style="color: white"></i>
+        </div>
+        <div class="marker__text hidden">
+            @city.Name
+        </div>
+
+        <div class="context__menu hidden">
+            <ul class="markers__menu">
+                <li><a asp-controller="Admin" asp-action="CreatePhotoAlbum">New photo album</a></li>
+                <li><a asp-controller="Admin" asp-action="PhotoAlbums" asp-route-id="@city.Id">Photo albums</a></li>
+
+            </ul>
+        </div>
+    </div>
+}
+
+<script>
+    $(function () {
+        $(".marker").draggable({
+            containment: ".map",
+            stop: function (event, ui) {
+                let top = PixelsToPercents(ui.position.top, $("#map").height()).toFixed();
+                let left = PixelsToPercents(ui.position.left, $("#map").width()).toFixed();
+                let cityId = $(this).attr("id");
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("EditMarker", "Admin")',
+                    data: { id: cityId, top: top, left: left },
+                    success: function () { $("#markers").submit(); }
+                });
+            }
+        });
+        
+    });
+
+</script>
+
+
+

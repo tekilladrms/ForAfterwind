@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ForAfterwind.Models.PhotoAlbum>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Photo albums";
+    Layout = "_AdminLayout";
+}
+
+
+    
+
+<h1>Edit photo albums</h1>
+<hr />
+<div class="row">
+    @foreach (var el in Model)
+    {
+        <div class="col-md-3">
+            <h3>@el.Name</h3>
+            <a asp-action="EditPhotoAlbum"
+               asp-controller="Admin"
+               asp-route-id="@el.Id">
+                <div class="photo-album__cover">
+                    <img src="@Url.Content(el.PathToCover)" />
+                </div>
+            </a>
+
+            <a asp-action="DeletePhotoAlbum"
+               asp-controller="Admin"
+               asp-route-id="@el.Id"> Delete </a>
+        </div>
+    }
+
+</div>
+<hr />
+<div>
+    <a asp-action="CreatePhotoAlbum"
+       asp-controller="Admin"
+       class="btn btn-primary">
+        New photo album
+    </a>
+</div>
+<div>
+    <a asp-action="PhotoAlbums"
+       asp-controller="Admin"
+       class="btn btn-primary">
+        All albums
+    </a>
+</div>
+<div>
+    <a asp-action="PhotoMap"
+       asp-controller="Admin"
+       class="btn btn-primary">
+        Return to the map
+    </a>
+</div>

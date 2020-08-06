@@ -4,15 +4,18 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+//using AspNetCore;
 using ForAfterwind.Domain;
 using ForAfterwind.Models;
+using ForAfterwind.ViewModels;
 using ImageMagick;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ForAfterwind.Controllers
 {
@@ -64,9 +67,37 @@ namespace ForAfterwind.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Photo()
+        public IActionResult Photo()
         {
-            return View(await db.PhotoAlbums.AsNoTracking().ToListAsync());
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> PhotoAlbums(int? id)
+        {
+            if (id == null)
+            {
+                return View(await db.PhotoAlbums.AsNoTracking().ToListAsync());
+            }
+            else
+            {
+                return View(await
+                db.PhotoAlbums
+                .AsNoTracking()
+                .Where(album => album.IsOnMap == true && album.CityId == id)
+                .ToListAsync());
+            }
+            
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> PhotoMap()
+        {
+            PhotoMapViewModel photoMap = new PhotoMapViewModel();
+            photoMap.Cities = await db.Cities.ToListAsync();
+            photoMap.PhotoAlbums = await db.PhotoAlbums.ToListAsync();
+            return View(photoMap);
         }
 
         [HttpGet]
@@ -78,7 +109,7 @@ namespace ForAfterwind.Controllers
         [HttpGet]
         public async Task<IActionResult> Blog()
         {
-            return View(await db.Posts.AsNoTracking().ToListAsync());    
+            return View(await db.Posts.AsNoTracking().ToListAsync());
         }
 
         // CRUD
@@ -140,6 +171,18 @@ namespace ForAfterwind.Controllers
             return PartialView(await db.AlbumStages.Where(stage => stage.ProgressBarId == id).ToListAsync());
         }
 
+        [HttpGet]
+        public async Task<PartialViewResult> _Cities()
+        {
+            return PartialView(await db.Cities.ToListAsync());
+        }
+
+        [HttpGet]
+        public async Task<PartialViewResult> _Markers()
+        {
+            return PartialView(await db.Cities.ToListAsync());
+        }
+
         public PartialViewResult _Picture(IFormFile uploadedFile)
         {
             return PartialView(uploadedFile);
@@ -156,7 +199,7 @@ namespace ForAfterwind.Controllers
         [HttpPost]
         public async Task<IActionResult> EditGreeting(Greeting greeting, IFormFile uploadedFile)
         {
-            if(uploadedFile != null)
+            if (uploadedFile != null)
             {
                 greeting.Cover = await FileToByteAsync(uploadedFile);
             }
@@ -174,15 +217,15 @@ namespace ForAfterwind.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProgressBar(ProgressBar progressBar, System.Drawing.Color favcolor)
         {
-            if(favcolor.IsKnownColor)
+            if (favcolor.IsKnownColor)
             {
                 progressBar.Color = favcolor.Name;
             }
-            else 
+            else
             {
                 progressBar.Color = GetRGBFromARGB(favcolor.Name);
             }
-            
+
 
             db.ProgressBars.Update(progressBar);
             await db.SaveChangesAsync();
@@ -274,14 +317,14 @@ namespace ForAfterwind.Controllers
                 string path = $"/Media/Albums/";
                 string subPath = $"{release.Name}/";
 
-                if(!Directory.Exists(path + subPath))
+                if (!Directory.Exists(path + subPath))
                 {
                     CreateDirectory(path, subPath);
                 }
 
                 using (var fileStream = new FileStream(
                     _appEnvironment.WebRootPath + path + subPath + uploadedFile.FileName, FileMode.Create))
-                    {
+                {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
                 release.PathToCover = path + subPath + uploadedFile.FileName;
@@ -325,20 +368,32 @@ namespace ForAfterwind.Controllers
             return RedirectToAction("Video");
         }
 
+        [HttpPost]
+        public async Task<StatusCodeResult> EditMarker(int? id, int top, int left)
+        {
+            var marker = await db.Cities.FirstOrDefaultAsync(city => city.Id == id);
+
+            marker.Top = top;
+            marker.Left = left;
+            db.Cities.Update(marker);
+            await db.SaveChangesAsync();
+            return StatusCode(200);
+        }
+
         [HttpGet]
         public async Task<IActionResult> EditPhotoAlbum(int? id)
         {
+            
+            if (await db.Cities.CountAsync() != 0)
+            {
+                ViewBag.Cities = new SelectList(db.Cities, "Id", "Name");
+            }
+
             if (id != null)
             {
-                var photoAlbum = await db.PhotoAlbums.
-                    Include(x => x.Photos).
-                    FirstOrDefaultAsync(x => x.Id == id);
-
-                if (photoAlbum != null)
-                {
-                    return View(photoAlbum);
-                }
+                return View(await db.PhotoAlbums.FirstOrDefaultAsync(album => album.Id == id));
             }
+
             return NotFound();
         }
         [HttpPost]
@@ -354,9 +409,14 @@ namespace ForAfterwind.Controllers
                 }
                 photoAlbum.PathToCover = path;
             }
+
+            photoAlbum.City = await db.Cities
+                .FirstOrDefaultAsync(marker =>
+                marker.Id == photoAlbum.CityId);
+
             db.PhotoAlbums.Update(photoAlbum);
             await db.SaveChangesAsync();
-            return RedirectToAction("Photo");
+            return RedirectToAction("PhotoAlbums");
         }
 
         [HttpGet]
@@ -378,7 +438,7 @@ namespace ForAfterwind.Controllers
             oldPost.Tags = newPost.Tags;
             oldPost.UrlSlug = GetUrlSlug(newPost.Title, newPost.Id);
 
-            if(uploadedFile != null)
+            if (uploadedFile != null)
             {
                 oldPost.CoverMimeType = uploadedFile.ContentType;
                 oldPost.Cover = await FileToByteAsync(uploadedFile);
@@ -453,7 +513,7 @@ namespace ForAfterwind.Controllers
         public IActionResult CreatePost()
         {
             Post post = new Post();
-            
+
             return View(post);
         }
 
@@ -464,13 +524,13 @@ namespace ForAfterwind.Controllers
             post.Modified = DateTime.Now;
             post.UrlSlug = GetUrlSlug(post.Title, post.Id);
 
-            if(uploadedFile != null)
+            if (uploadedFile != null)
             {
                 post.CoverMimeType = uploadedFile.ContentType;
                 post.Cover = await FileToByteAsync(uploadedFile);
                 post.CoverThumbnail = await ResizeImageAsync(uploadedFile);
             }
-            
+
             db.Posts.Add(post);
             await db.SaveChangesAsync();
 
@@ -481,7 +541,7 @@ namespace ForAfterwind.Controllers
         public IActionResult CreateMusician()
         {
             Musician musician = db.Musicians.FirstOrDefault(x => x.Name == "New");
-            
+
 
             if (musician != null)
             {
@@ -598,12 +658,14 @@ namespace ForAfterwind.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePhotoAlbum(PhotoAlbum photoAlbum, IFormFile uploadedFile)
         {
+            string path = $"/Media/Photo albums/";
+            string subPath = $"{photoAlbum.Name}/";
+
+            CreateDirectory(path, subPath);
+            photoAlbum.PathToPhotoAlbum = path + subPath;
             if (uploadedFile != null)
             {
-                string path = $"/Media/Photo albums/";
-                string subPath = $"{photoAlbum.Name}/";
-
-                CreateDirectory(path, subPath);
+                
 
                 using (var fileStream = new FileStream(
                     _appEnvironment.WebRootPath + path + subPath + uploadedFile.FileName, FileMode.Create))
@@ -612,6 +674,8 @@ namespace ForAfterwind.Controllers
                 }
                 photoAlbum.PathToCover = path + subPath + uploadedFile.FileName;
             }
+
+
             db.PhotoAlbums.Add(photoAlbum);
             await db.SaveChangesAsync();
             return RedirectToAction("Photo");
@@ -665,7 +729,7 @@ namespace ForAfterwind.Controllers
             await db.SaveChangesAsync();
 
             return StatusCode(200);
-            
+
         }
 
         [HttpPost]
@@ -699,7 +763,7 @@ namespace ForAfterwind.Controllers
             {
                 Release release = await db.Releases.FirstOrDefaultAsync(release => release.Id == id);
 
-                foreach(var file in uploadedFiles)
+                foreach (var file in uploadedFiles)
                 {
                     string path = $"/Media/Albums/{release.Name}/" + file.FileName;
 
@@ -722,15 +786,24 @@ namespace ForAfterwind.Controllers
                     {
                         song.Type = TypesOfReleases.Video;
                     }
-                    
+
                     await db.Songs.AddAsync(song);
                 }
                 await db.SaveChangesAsync();
 
-                
+
             }
             return StatusCode(200);
 
+        }
+
+        [HttpPost]
+        public async Task<StatusCodeResult> CreateCity(string name, int top, int left)
+        {
+
+            await db.Cities.AddAsync(new City { Name = name, Top = top, Left = left });
+            await db.SaveChangesAsync();
+            return StatusCode(200);
         }
 
 
@@ -763,21 +836,21 @@ namespace ForAfterwind.Controllers
                     await db.SaveChangesAsync();
                     DeleteFileFromDirectory(musician.Photo);
                     return RedirectToAction("Musician");
-                    
+
                 }
             }
             return NotFound();
         }
-        
+
         public async Task<IActionResult> DeleteRelease(int? id)
         {
             if (id != null)
             {
                 Release release = await db.Releases.FirstOrDefaultAsync(x => x.Id == id);
-                
+
                 if (release != null)
                 {
-                    foreach(var song in db.Songs.Where(x => x.ReleaseId == id))
+                    foreach (var song in db.Songs.Where(x => x.ReleaseId == id))
                     {
                         db.Songs.Remove(song);
                         DeleteFileFromDirectory(song.PathToSong);
@@ -786,12 +859,12 @@ namespace ForAfterwind.Controllers
                     await db.SaveChangesAsync();
                     DeleteDirectory(release.PathToCover);
                     return RedirectToAction("Audio");
-                    
+
                 }
             }
             return NotFound();
         }
-        
+
         public async Task<IActionResult> DeleteVideoAlbum(int? id)
         {
             if (id != null)
@@ -851,7 +924,7 @@ namespace ForAfterwind.Controllers
 
         public async Task<IActionResult> DeleteGreeting(int? id)
         {
-            db.Greetings.Remove(await db.Greetings.FirstOrDefaultAsync(greeting => greeting.Id == id)); 
+            db.Greetings.Remove(await db.Greetings.FirstOrDefaultAsync(greeting => greeting.Id == id));
             await db.SaveChangesAsync();
             return RedirectToAction("Greetings");
         }
@@ -865,7 +938,7 @@ namespace ForAfterwind.Controllers
 
             return StatusCode(200);
         }
-        
+
         public async Task<StatusCodeResult> DeleteLink(int? id)
         {
             SocialLink link = await db.SocialLinks.FirstOrDefaultAsync(link => link.Id == id);
@@ -873,7 +946,7 @@ namespace ForAfterwind.Controllers
             await db.SaveChangesAsync();
             return StatusCode(200);
         }
-        
+
         public async Task<StatusCodeResult> DeleteSong(int? id)
         {
             Song song = await db.Songs.FirstOrDefaultAsync(song => song.Id == id);
@@ -883,7 +956,7 @@ namespace ForAfterwind.Controllers
 
             return StatusCode(200);
         }
-        
+
         public async Task<StatusCodeResult> DeleteVideo(int? id)
         {
             Video video = await db.Videos.FirstOrDefaultAsync(video => video.Id == id);
@@ -893,7 +966,7 @@ namespace ForAfterwind.Controllers
 
             return StatusCode(200);
         }
-        
+
         public async Task<StatusCodeResult> DeletePhoto(int? id)
         {
             Photo photo = await db.Photos.FirstOrDefaultAsync(photo => photo.Id == id);
@@ -908,6 +981,14 @@ namespace ForAfterwind.Controllers
         {
             db.AlbumStages.Remove(await db.AlbumStages.FirstOrDefaultAsync(stage => stage.Id == id));
             await db.SaveChangesAsync();
+            return StatusCode(200);
+        }
+
+        public async Task<StatusCodeResult> DeleteCity(int? id)
+        {
+            db.Remove(await db.Cities.FirstOrDefaultAsync(city => city.Id == id));
+            await db.SaveChangesAsync();
+
             return StatusCode(200);
         }
 
@@ -940,7 +1021,7 @@ namespace ForAfterwind.Controllers
 
         void DeleteDirectory(string path)
         {
-            if(path != null)
+            if (path != null)
             {
                 string directoryName = Path.GetDirectoryName(path);
                 string fullPath = _appEnvironment.WebRootPath + directoryName;
